@@ -1,0 +1,29 @@
+{
+  "name": "@kalisio/graphiks",
+  "version": "0.1.0",
+  "description": "Factory de formes paramétriques en JavaScript pur",
+  "main": "dist/graphiks.umd.js",
+  "module": "dist/graphiks.es.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/graphiks.es.js",
+      "require": "./dist/graphiks.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["graphics", "SVG", "parametric", "vite", "factory"],
+  "author": "Kalisio",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "vite": "^7.1.9"
+  }
+}
+
