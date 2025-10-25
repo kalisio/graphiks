@@ -7,7 +7,13 @@ It provides a simple factory pattern that lets you register your own shape gener
 
 ---
 
-## Installation
+## Principle
+
+
+
+## Usage 
+
+### Installation
 
 ```bash
 npm install @kalisio/graphiks
@@ -27,14 +33,9 @@ Or use it directly from a CDN:
 </script>
 ```
 
-## Examples
+### Examples
 
-Open the live example page in your browser: 
-
-[View Example](https://kalisio.github.io/graphiks/example/index.html)
-
-## Usage
-
+Open the [live example page](https://kalisio.github.io/graphiks/example/index.html) in your browser 
 
 ## API
 
