@@ -134,7 +134,7 @@ const shapes = [
 ]
 
 for (const shapeParams of shapes) {
-  const shapeObj = Graphiks.renderShape({ ...shapeParams, text: { label: shapeParams.shape } })
+  const shapeObj = Graphiks.renderShape({ ...shapeParams, text: { label: shapeParams.shape, transform: { translate: [50, 140] } } })
   const container = document.getElementById(shapeParams.shape)
   container.innerHTML = shapeObj.toSVG()
 }
