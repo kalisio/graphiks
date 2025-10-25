@@ -10,11 +10,24 @@ export function toSVGElement (params) {
   if (!params.shape) {
     Logger.error(`Invalid argument: 'params.shape' must be defined`)
   }
-  let attrs = toSVGAttributes(params)
-  let styleAttrs = toSVGStyleAttributes(params.style)
-  let transformAttr = toSVGTransformAttribute(params.transform)
-  let shape = `${params.shape.slice(0, -2)} ${styleAttrs} ${transformAttr} />`
-  return `<svg ${attrs}>${shape}</svg>`
+  const shapeElement = params.shape
+  const textElement = toSVGTextElement(params.text)
+  const iconElement = toSVGIconElement(params.icon)
+  const transformAttr = toSVGTransformAttribute(params.transform)
+  const group = `<g ${transformAttr}>${shapeElement}${textElement}${iconElement}</g>` 
+  return `<svg ${toSVGAttributes(params)}>${group}</svg>`
+}
+
+export function toSVGTextElement (text) {
+  if (!text || !text.label) return ''
+  return `<text ${toSVGTextAtributes(text)}>${text.label}</text>`
+}
+
+export function toSVGIconElement (icon) {
+  if (!icon ||!icon.classes) return ''
+  const transformAttr = toSVGTransformAttribute(icon.transform)
+  const attrs = `${transformAttr}`
+  return `<foreignObject ${attrs}><i class="${icon.classes}"></i></foreignObject>`
 }
 
 export function toSVGAttributes (params) {
@@ -28,17 +41,20 @@ export function toSVGAttributes (params) {
   return attrs.trim()
 }
 
-export function toSVGStyleAttributes (params) {
-  if (!params) return ''
-  let attrs = `${toSVGFillAttributes(params)} `
-  if (params.stroke) attrs += toSVGStrokeAttributes(params.stroke)
-  return attrs.trim()
+export function toSVGTextAtributes (params) {
+    if (!params) return ''
+    let attrs = 'text-anchor="middle" alignment-baseline="central" '
+    attrs += `font-size="${params.fontSize || '2em'}" `
+    if (params.transform) attrs += toSVGTransformAttribute(params.transform)
+    return attrs.trim()
 }
 
-export function toSVGFillAttributes (params) {
+export function toSVGStyleAttributes (params) {
+  if (!params) return ''
   let attrs = ''
   if (params.fill) attrs += `fill="${params.fill}" `
   if (params.opacity) attrs += `fill-opacity="${params.opacity}" `
+  if (params.stroke) attrs += toSVGStrokeAttributes(params.stroke)
   return attrs.trim()
 }
 
@@ -68,3 +84,5 @@ export function toSVGTransformAttribute (transform) {
   attr += '"'
   return attr.trim()
 }
+
+

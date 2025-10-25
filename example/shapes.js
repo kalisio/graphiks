@@ -97,17 +97,17 @@ const shapes = [
       value: 10,
       label: 'a',
       fill: 'red',
-      stroke: { color: 'orange', width: 3 }
+      opacity: 0.75
     }, {
       value: 25,
       label: 'b',
       fill: 'green',
-      stroke: { color: 'orange', width: 3 }
+      opacity: 0.75
     }, {
       value: 18,
       label: 'c',
       fill: 'blue',
-      stroke: { color: 'orange', width: 3 }
+      opacity: 0.75
     }],
     fill: 'magenta', opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
@@ -115,7 +115,7 @@ const shapes = [
 ]
 
 for (const shapeParams of shapes) {
-  const shapeObj = Graphiks.renderShape(shapeParams)
+  const shapeObj = Graphiks.renderShape({...shapeParams, text: { label: shapeParams.shape } })
   const container = document.getElementById(shapeParams.shape)
   container.innerHTML = shapeObj.toSVG()
 }

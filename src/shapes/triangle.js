@@ -1,4 +1,4 @@
-import { Logger } from "../utils/logger.js"
+import { toSVGStyleAttributes } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -11,19 +11,21 @@ export function triangle (params) {
   return {
     ...getSize(params),
     viewBox: [0, 0, 100, 100],
-    shape: '<polygon points="50 0, 100 100, 0 100" />',
-    style: {
-      fill: params.fill,
-      fillOpacity: params.fillOpacity,
-      stroke: params.stroke
-    },
-    transform: params.transform,
+    shape: `<polygon points="50 0, 100 100, 0 100" ${toSVGStyleAttributes(params)} />`,
     icon: {
-      class: params.icon?.class
+      classes: params.icon?.classes,
+      transform: {
+        translate: [50, 50]
+      }
     },
     text: {
-      label: params.test?.label
-    }
+      label: params.text?.label,
+      fontSize: params.text?.fontSize,
+      transform: {
+        translate: [50, 50]
+      }
+    },
+    transform: params.transform
   }
 }
 

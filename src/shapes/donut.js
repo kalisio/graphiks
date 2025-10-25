@@ -1,5 +1,11 @@
 import { Logger } from '../utils/logger.js'
-import { toSVGFillAttributes } from '../utils/svg.js'
+import { toSVGStyleAttributes } from '../utils/svg.js'
+
+function getSize (params) {
+  if (params.size) return { width: params.size[0], height: params.size[1] }
+  if (params.radius) return { width: params.radius * 2, height: params.radius * 2 }
+  return { width: 50, height: 50 }
+}
 
 export function donut (params) {
   // check arguments
@@ -7,9 +13,8 @@ export function donut (params) {
     Logger.error(`Invalid arguments: 'params.slices' must be defined`)
     return
   }
-  const innerRadius = params.innerRadius || 10
-  const outerRadius = params.innerRadius || 25
-  const strokeWidth = params.stroke?.width || 1
+  const outerRadius = 50
+  const innerRadius = params.innerRadius || 20
   // compute additional parameters
   const center = outerRadius
   const sum = params.slices.reduce((sum, slice) => {
@@ -33,7 +38,7 @@ export function donut (params) {
       A ${innerRadius} ${innerRadius} 0 1 0 ${center} ${center + innerRadius}
       A ${innerRadius} ${innerRadius} 0 1 0 ${center} ${center - innerRadius}
     `
-    const styleAttrs = toSVGFillAttributes(params)
+    const styleAttrs = toSVGStyleAttributes(params)
     shape = `<path d="${pathData.trim()}" ${styleAttrs}><title>${slice.label}</title></path>`
   } else {
     for (const slice of params.slices) {
@@ -62,7 +67,7 @@ export function donut (params) {
           A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${x4} ${y4}
           Z
         `
-        const styleAttrs = toSVGFillAttributes(slice)
+        const styleAttrs = toSVGStyleAttributes({ ...slice, stroke: params.stroke })
         shape += `<path d="${pathData.trim()}" ${styleAttrs}><title>${slice.label}</title></path>`
         currentAngle += angle
       }
@@ -74,21 +79,22 @@ export function donut (params) {
   if (centerColor && centerColor !== 'transparent') {
     shape += `<circle cx="${center}" cy="${center}" r="${innerRadius}" fill="${centerColor}" />`
   }
-  /*const centerLabel = String(_.get(options, 'center.label'))
-  if (!_.isEmpty(centerLabel)) {
-    content += `<text x="${center}" y="${center}" style="font-size: 10px;" text-anchor="middle" alignment-baseline="central">${centerLabel}</text>`
-  }*/
   return {
-    width: center * 2,
-    height: center * 2,
-    viewBox: [0, 0, center * 2, center * 2],
+    ...getSize(params),
+    viewBox: [0, 0, 100, 100],
     shape,
-    transform: params.transform,
     icon: {
-      class: params.icon?.class
+      transform: {
+        translate: [50, 50]
+      },
+      ...params.icon
     },
     text: {
-      label: params.test?.label
-    }
+      transform: {
+        translate: [50, 50]
+      },
+      ...params.text
+    },
+    transform: params.transform
   }
 }
