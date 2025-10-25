@@ -1,7 +1,7 @@
 const LEVELS = ['debug', 'info', 'warn', 'error']
 let LOG_LEVEL = 'warn'
 
-function shouldLog(level) {
+function shouldLog (level) {
   return LEVELS.indexOf(level) >= LEVELS.indexOf(LOG_LEVEL)
 }
 

@@ -6,7 +6,6 @@ function getSize (params) {
   return { width: 50, height: 50 }
 }
 
-
 export function triangle (params) {
   return {
     ...getSize(params),

@@ -15,7 +15,7 @@ export const Graphiks = {
   renderShape (params) {
     // check arguments
     if (!params.shape) {
-      Logger.error(`Invalid argument: 'params.shape' must be defined`)
+      Logger.error('Invalid argument: \'params.shape\' must be defined')
     }
     // generate the shape
     const generatorFn = Registry.get(params.shape)

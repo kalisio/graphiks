@@ -49,4 +49,3 @@ export function squarePin (params) {
     anchor: 'bottom-center'
   }
 }
-

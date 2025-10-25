@@ -26,6 +26,3 @@ export function circle (params) {
     transform: params.transform
   }
 }
-
-
-

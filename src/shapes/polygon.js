@@ -11,7 +11,6 @@ export function pentagon (params) {
     ...getSize(params),
     viewBox: [0, 0, 100, 100],
     shape: `<path d="M50 0 L100 38 L81 100 L19 100 L0 38 Z" ${toSVGStyleAttributes(params)} />`,
-    transform: params.transform,
     icon: {
       transform: {
         translate: [50, 50]
@@ -33,7 +32,6 @@ export function hexagon (params) {
     ...getSize(params),
     viewBox: [0, 0, 100, 100],
     shape: `<path d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" ${toSVGStyleAttributes(params)} />`,
-    transform: params.transform,
     icon: {
       transform: {
         translate: [50, 50]

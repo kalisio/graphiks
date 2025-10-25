@@ -10,10 +10,10 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/graphiks.js'),
       name: 'Graphiks',
-      fileName: (format) => `graphiks.${format}.js`,
+      fileName: (format) => `graphiks.${format}.js`
     },
     rollupOptions: {
-      external: [],
+      external: []
     },
     sourcemap: true,
     minify: true

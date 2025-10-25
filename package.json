@@ -14,16 +14,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "lint": "standard --fix"
   },
-  "keywords": ["graphics", "SVG", "parametric", "vite", "factory"],
+  "keywords": [
+    "graphics",
+    "SVG",
+    "parametric",
+    "vite",
+    "factory"
+  ],
   "author": "Kalisio",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "standard": "^17.1.2",
     "vite": "^7.1.9"
   }
 }
-

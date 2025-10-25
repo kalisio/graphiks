@@ -2,19 +2,19 @@ import { Logger } from './logger.js'
 
 export function toSVGElement (params) {
   if (!params.width) {
-    Logger.error(`Invalid argument: 'params.width' must be defined`)
+    Logger.error('Invalid argument: \'params.width\' must be defined')
   }
   if (!params.height) {
-    Logger.error(`Invalid argument: 'params.height' must be defined`)
+    Logger.error('Invalid argument: \'params.height\' must be defined')
   }
   if (!params.shape) {
-    Logger.error(`Invalid argument: 'params.shape' must be defined`)
+    Logger.error('Invalid argument: \'params.shape\' must be defined')
   }
   const shapeElement = params.shape
   const textElement = toSVGTextElement(params.text)
   const iconElement = toSVGIconElement(params.icon)
   const transformAttr = toSVGTransformAttribute(params.transform)
-  const group = `<g ${transformAttr}>${shapeElement}${textElement}${iconElement}</g>` 
+  const group = `<g ${transformAttr}>${shapeElement}${textElement}${iconElement}</g>`
   return `<svg ${toSVGAttributes(params)}>${group}</svg>`
 }
 
@@ -24,7 +24,7 @@ export function toSVGTextElement (text) {
 }
 
 export function toSVGIconElement (icon) {
-  if (!icon ||!icon.classes) return ''
+  if (!icon || !icon.classes) return ''
   const transformAttr = toSVGTransformAttribute(icon.transform)
   const attrs = `${transformAttr}`
   return `<foreignObject ${attrs}><i class="${icon.classes}"></i></foreignObject>`
@@ -42,11 +42,11 @@ export function toSVGAttributes (params) {
 }
 
 export function toSVGTextAtributes (params) {
-    if (!params) return ''
-    let attrs = 'text-anchor="middle" alignment-baseline="central" '
-    attrs += `font-size="${params.fontSize || '2em'}" `
-    if (params.transform) attrs += toSVGTransformAttribute(params.transform)
-    return attrs.trim()
+  if (!params) return ''
+  let attrs = 'text-anchor="middle" alignment-baseline="central" '
+  attrs += `font-size="${params.fontSize || '2em'}" `
+  if (params.transform) attrs += toSVGTransformAttribute(params.transform)
+  return attrs.trim()
 }
 
 export function toSVGStyleAttributes (params) {
@@ -61,7 +61,7 @@ export function toSVGStyleAttributes (params) {
 export function toSVGStrokeAttributes (stroke) {
   if (!stroke.color || stroke.color === 'transparent') return ''
   let attrs = `stroke="${stroke.color}" `
-  attrs += `vector-effect="non-scaling-stroke" `
+  attrs += 'vector-effect="non-scaling-stroke" '
   if (stroke.opacity) attrs += `stroke-opacity="${stroke.opacity}" `
   if (stroke.width) attrs += `stroke-width="${stroke.width}" `
   if (stroke.dashArray) attrs += `stroke-dasharray="${stroke.dashArray}" `
@@ -75,7 +75,7 @@ export function toSVGStrokeAttributes (stroke) {
 
 export function toSVGTransformAttribute (transform) {
   if (!transform) return ''
-  let attr = `transform="`
+  let attr = 'transform="'
   if (transform.rotate) attr += `rotate(${transform.rotate.join(' ')}) `
   if (transform.translate) attr += `translate(${transform.translate.join(' ')}) `
   if (transform.scale) attr += `scale(${transform.scale.join(' ')}) `
@@ -84,5 +84,3 @@ export function toSVGTransformAttribute (transform) {
   attr += '"'
   return attr.trim()
 }
-
-

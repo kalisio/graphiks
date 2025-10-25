@@ -2,7 +2,6 @@ import { toSVGElement } from './utils/svg.js'
 import { Cache } from './utils/cache.js'
 
 export function Shape (params) {
-
   const shape = params
 
   shape.toSVG = () => {

@@ -10,7 +10,7 @@ function getSize (params) {
 export function donut (params) {
   // check arguments
   if (!params.slices) {
-    Logger.error(`Invalid arguments: 'params.slices' must be defined`)
+    Logger.error('Invalid arguments: \'params.slices\' must be defined')
     return
   }
   const outerRadius = 50
@@ -22,7 +22,7 @@ export function donut (params) {
     return sum + value
   }, 0)
   if (sum === 0) {
-    Logger.error(`Invalid arguments: 'params.slice' sum must be non null`)
+    Logger.error('Invalid arguments: \'params.slice\' sum must be non null')
     return
   }
   // render slices data
