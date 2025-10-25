@@ -21,7 +21,7 @@ It provides a simple factory pattern that lets you register your own shape gener
 npm install @kalisio/graphiks
 ```
 
-Or
+Or use **yarn**:
 
 ```bash
 yarn add @kalisio/graphiks
@@ -39,7 +39,7 @@ Or use it directly from a CDN:
 
 Open the live example page in your browser: 
 
-[View Example](https://<username>.github.io/graphiks/example/index.html)
+[View Example](https://kalisio.github.io/graphiks/example/index.html)
 
 ## Usage
 
