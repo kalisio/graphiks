@@ -1,17 +1,9 @@
-# @kalisio/graphiks
+# graphiks
 
 > A minimal parametric shape factory for SVG graphics — built in pure JavaScript.
 
 **Graphiks** is a lightweight and extensible library for creating, composing, and rendering parametric shapes using **SVG**.
 It provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements.
-
-## Features
-
-- 🧠 **Factory pattern** — register, list, and create shapes dynamically
-- 🧩 **Composable** — shapes can contain other shapes (`<g>` groups)
-- 🎨 **SVG-based rendering** — outputs real DOM elements
-- ⚙️ **Zero dependencies** — pure, modern JavaScript
-- 🔄 **Extensible** — plug in your own generators or interfaces (Canvas, WebGL, …)
 
 ---
 
