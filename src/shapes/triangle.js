@@ -1,4 +1,4 @@
-import { toSVGStyleAttributes } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -9,8 +9,11 @@ function getSize (params) {
 export function triangle (params) {
   return {
     ...getSize(params),
-    viewBox: [0, 0, 100, 100],
-    shape: `<polygon points="50 0, 100 100, 0 100" ${toSVGStyleAttributes(params)} />`,
+    shape:
+      `<polygon points="50 0, 100 100, 0 100"
+        ${toSVGStyleAttributes(params)}
+        ${toSVGTransformAttribute(params.transform)}
+      />`,
     icon: {
       classes: params.icon?.classes,
       transform: {
@@ -18,13 +21,12 @@ export function triangle (params) {
       }
     },
     text: {
-      label: params.text?.label,
-      fontSize: params.text?.fontSize,
       transform: {
         translate: [50, 50]
-      }
+      },
+      ...params.text
     },
-    transform: params.transform
+    style: params.style
   }
 }
 

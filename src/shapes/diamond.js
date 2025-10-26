@@ -1,4 +1,4 @@
-import { toSVGStyleAttributes } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -9,8 +9,11 @@ function getSize (params) {
 export function diamond (params) {
   return {
     ...getSize(params),
-    viewBox: [0, 0, 100, 100],
-    shape: `<polygon points="50 0, 100 50, 50 100, 0 50" ${toSVGStyleAttributes(params)} />`,
+    shape:
+      `<polygon points="50 0, 100 50, 50 100, 0 50"
+        ${toSVGStyleAttributes(params)}
+        ${toSVGTransformAttribute(params.transform)}
+      />`,
     icon: {
       transform: {
         translate: [50, 50]
@@ -23,6 +26,6 @@ export function diamond (params) {
       },
       ...params.text
     },
-    transform: params.transform
+    style: params.style
   }
 }

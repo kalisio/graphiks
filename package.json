@@ -5,6 +5,24 @@
   "main": "dist/graphiks.umd.js",
   "module": "dist/graphiks.es.js",
   "type": "module",
+  "keywords": [
+    "graphics",
+    "SVG",
+    "shape"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kalisio/graphiks.git"
+  },
+  "author": {
+    "name": "Kalisio contributors",
+    "url": "https://github.com/kalisio"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/kalisio/graphiks/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/graphiks.es.js",
@@ -17,15 +35,11 @@
     "prepublishOnly": "npm run build",
     "lint": "standard --fix"
   },
-  "keywords": [
-    "graphics",
-    "SVG",
-    "parametric",
-    "vite",
-    "factory"
-  ],
-  "author": "Kalisio",
-  "license": "MIT",
+  "standard": {
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },

@@ -1,4 +1,4 @@
-import { toSVGStyleAttributes } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -9,8 +9,11 @@ function getSize (params) {
 export function rect (params) {
   return {
     ...getSize(params),
-    viewBox: [0, 0, 100, 100],
-    shape: `<rect x="0" y="0" width="100" height="100" ${toSVGStyleAttributes(params)} />`,
+    shape:
+      `<rect x="0" y="0" width="100" height="100"
+        ${toSVGStyleAttributes(params)}
+        ${toSVGTransformAttribute(params.transform)}
+      />`,
     icon: {
       transform: {
         translate: [50, 50]
@@ -23,15 +26,18 @@ export function rect (params) {
       },
       ...params.text
     },
-    transform: params.transform
+    style: params.style
   }
 }
 
 export function roundedRect (params) {
   return {
     ...getSize(params),
-    viewBox: [0, 0, 100, 100],
-    shape: `<rect cx="0" cy="0" width="100" height="100" rx="20" ry="20" ${toSVGStyleAttributes(params)} />`,
+    shape:
+      `<rect cx="0" cy="0" width="100" height="100" rx="20" ry="20"
+        ${toSVGStyleAttributes(params)}
+        ${toSVGTransformAttribute(params.transform)}
+      />`,
     icon: {
       transform: {
         translate: [50, 50]
@@ -44,6 +50,6 @@ export function roundedRect (params) {
       },
       ...params.text
     },
-    transform: params.transform
+    style: params.style
   }
 }

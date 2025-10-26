@@ -2,7 +2,7 @@ import { Logger } from './utils/logger.js'
 import { circle } from './shapes/circle.js'
 import { cross } from './shapes/cross.js'
 import { diamond } from './shapes/diamond.js'
-import { donut } from './shapes/donut.js'
+import { donut, pie } from './shapes/donut.js'
 import { heart } from './shapes/heart.js'
 import { markerPin, squarePin } from './shapes/pin.js'
 import { pentagon, hexagon, polygon } from './shapes/polygon.js'
@@ -15,6 +15,7 @@ const SHAPES = {
   cross,
   diamond,
   donut,
+  pie,
   heart,
   pentagon,
   hexagon,

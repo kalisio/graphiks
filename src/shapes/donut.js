@@ -1,11 +1,16 @@
 import { Logger } from '../utils/logger.js'
-import { toSVGStyleAttributes } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
   if (params.radius) return { width: params.radius * 2, height: params.radius * 2 }
   return { width: 50, height: 50 }
 }
+
+const DEFAULT_STYLE = `
+  .graphiks-donut-slice { cursor: pointer;  transition: opacity 0.2s, transform 0.2s; }
+  .graphiks-donut-slice:hover { opacity: 0.8; transform-origin: center; transform: scale(1.05); }
+`
 
 export function donut (params) {
   // check arguments
@@ -14,7 +19,7 @@ export function donut (params) {
     return
   }
   const outerRadius = 50
-  const innerRadius = params.innerRadius || 20
+  const innerRadius = params.innerRadius ?? 20
   // compute additional parameters
   const center = outerRadius
   const sum = params.slices.reduce((sum, slice) => {
@@ -26,7 +31,7 @@ export function donut (params) {
     return
   }
   // render slices data
-  let shape = '<g>'
+  let shape = `<g ${toSVGTransformAttribute(params.transform)}>`
   let currentAngle = -Math.PI / 2
   if (params.slices.length === 1) {
     const slice = params.slices[0]
@@ -51,14 +56,14 @@ export function donut (params) {
         const endAngle = currentAngle + angle
         const endCos = Math.cos(endAngle)
         const endSin = Math.sin(endAngle)
-        const x1 = center + outerRadius * startCos
-        const y1 = center + outerRadius * startSin
-        const x2 = center + outerRadius * endCos
-        const y2 = center + outerRadius * endSin
-        const x3 = center + innerRadius * endCos
-        const y3 = center + innerRadius * endSin
-        const x4 = center + innerRadius * startCos
-        const y4 = center + innerRadius * startSin
+        const x1 = center + (outerRadius * startCos)
+        const y1 = center + (outerRadius * startSin)
+        const x2 = center + (outerRadius * endCos)
+        const y2 = center + (outerRadius * endSin)
+        const x3 = center + (innerRadius * endCos)
+        const y3 = center + (innerRadius * endSin)
+        const x4 = center + (innerRadius * startCos)
+        const y4 = center + (innerRadius * startSin)
         const largeArc = angle > Math.PI ? 1 : 0
         const pathData = `
           M ${x1} ${y1}
@@ -68,7 +73,7 @@ export function donut (params) {
           Z
         `
         const styleAttrs = toSVGStyleAttributes({ ...slice, stroke: params.stroke })
-        shape += `<path d="${pathData.trim()}" ${styleAttrs}><title>${slice.label}</title></path>`
+        shape += `<path d="${pathData.trim()}" ${styleAttrs} class="graphiks-donut-slice"><title>${slice.label}</title></path>`
         currentAngle += angle
       }
     }
@@ -81,7 +86,6 @@ export function donut (params) {
   }
   return {
     ...getSize(params),
-    viewBox: [0, 0, 100, 100],
     shape,
     icon: {
       transform: {
@@ -95,6 +99,13 @@ export function donut (params) {
       },
       ...params.text
     },
-    transform: params.transform
+    style: params.style || DEFAULT_STYLE
   }
+}
+
+export function pie (params) {
+  return donut({
+    innerRadius: 0,
+    ...params
+  })
 }

@@ -11,11 +11,16 @@ export function toSVGElement (params) {
     Logger.error('Invalid argument: \'params.shape\' must be defined')
   }
   const shapeElement = params.shape
+  const styleElement = toSVGStyleElement(params.style)
   const textElement = toSVGTextElement(params.text)
   const iconElement = toSVGIconElement(params.icon)
-  const transformAttr = toSVGTransformAttribute(params.transform)
-  const group = `<g ${transformAttr}>${shapeElement}${textElement}${iconElement}</g>`
-  return `<svg ${toSVGAttributes(params)}>${group}</svg>`
+  const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
+  return `<svg ${toSVGAttributes(params)}>${styleElement}${groupElement}</svg>`
+}
+
+export function toSVGStyleElement (style) {
+  if (!style) return ''
+  return `<style>${style}</style>`
 }
 
 export function toSVGTextElement (text) {
@@ -32,10 +37,10 @@ export function toSVGIconElement (icon) {
 
 export function toSVGAttributes (params) {
   if (!params) return ''
-  const margin = params.stroke ? params.stroke.width || 1 : 0
+  const margin = params.stroke ? params.stroke.width ?? 1 : 0
   let attrs = 'xmlns="http://www.w3.org/2000/svg"'
   attrs += ` width="${params.width}" height="${params.height}"`
-  attrs += ` viewBox="${params.viewBox[0] - margin / 2} ${params.viewBox[1] - margin / 2} ${params.viewBox[2] + margin} ${params.viewBox[3] + margin}"`
+  attrs += ` viewBox="${0 - margin / 2} ${0 - margin / 2} ${100 + margin} ${100 + margin}"`
   attrs += ' preserveAspectRatio="none"'
   attrs += ' overflow="visible"'
   return attrs.trim()
@@ -44,7 +49,7 @@ export function toSVGAttributes (params) {
 export function toSVGTextAtributes (params) {
   if (!params) return ''
   let attrs = 'text-anchor="middle" alignment-baseline="central" '
-  attrs += `font-size="${params.fontSize || '2em'}" `
+  attrs += `font-size="${params.fontSize ?? '1em'}" `
   if (params.transform) attrs += toSVGTransformAttribute(params.transform)
   return attrs.trim()
 }

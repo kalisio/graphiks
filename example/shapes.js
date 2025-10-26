@@ -5,7 +5,8 @@ const shapes = [
     shape: 'circle',
     fill: 'red',
     opacity: 0.5,
-    stroke: { color: 'orange', width: 3 }
+    stroke: { color: 'orange', width: 3 },
+    style: 'circle { fill: gold; stroke: maroon; stroke-width: 2px; }'
   },
   {
     shape: 'cross',
@@ -130,11 +131,40 @@ const shapes = [
     fill: 'magenta',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
+  },
+  {
+    shape: 'pie',
+    slices: [{
+      value: 10,
+      label: 'a',
+      fill: 'red',
+      opacity: 0.75
+    }, {
+      value: 25,
+      label: 'b',
+      fill: 'green',
+      opacity: 0.75
+    }, {
+      value: 18,
+      label: 'c',
+      fill: 'blue',
+      opacity: 0.75
+    }],
+    fill: 'magenta',
+    opacity: 0.5,
+    stroke: { color: 'orange', width: 1 }
   }
 ]
 
 for (const shapeParams of shapes) {
-  const shapeObj = Graphiks.renderShape({ ...shapeParams, text: { label: shapeParams.shape, transform: { translate: [50, 140] } } })
+  const shapeObj = Graphiks.renderShape({
+    ...shapeParams,
+    text: {
+      label: shapeParams.shape,
+      fontSize: '2em',
+      transform: { translate: [50, 140] }
+    }
+  })
   const container = document.getElementById(shapeParams.shape)
   container.innerHTML = shapeObj.toSVG()
 }
