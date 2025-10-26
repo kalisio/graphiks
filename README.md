@@ -11,9 +11,12 @@ It provides a simple factory pattern that lets you register your own shape gener
 
 
 
-## Usage 
+
+## Usage
 
 ### Installation
+
+Install from npm:
 
 ```bash
 npm install @kalisio/graphiks
@@ -33,11 +36,27 @@ Or use it directly from a CDN:
 </script>
 ```
 
+### Quick start
+
+```js
+import { Graphiks } from '@kalisio/graphiks'
+
+// create a factory instance
+const graphiks = Graphiks()
+
+// create an orange 4-point star with a red stroke
+const star4 = graphiks('star4', { fill: 'orange', stroke: { red } })
+
+// add the shape to the dom
+const container = document.getElementById('#star5-container')
+container.appendChild(star5.toSVG())
+```
+
 ### Examples
 
-Open the [live example page](https://kalisio.github.io/graphiks/example/index.html) in your browser 
+Open the [live example page](https://kalisio.github.io/graphiks/example/index.html) in your browser
 
-## API
+## API Reference
 
 ### Graphiks()
 
@@ -63,7 +82,7 @@ Copyright (c) 2025-20xx Kalisio
 
 Licensed under the [MIT license](LICENSE).
 
-## Authors
+## Sponsors
 
 This project is sponsored by
 

@@ -23,5 +23,8 @@ export const Graphiks = {
       Logger.error(`Invalid shape: '${params.shape}' is unknown`)
     }
     return Shape(generatorFn(params))
+  },
+  setLogLevel (level) {
+    Logger.setLevel(level)
   }
 }
