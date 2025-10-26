@@ -35,7 +35,6 @@ Or use it directly from a CDN:
   import { Graphiks } from 'https://unpkg.com/@kalisio/graphiks/dist/graphiks.es.js'
 </script>
 ```
-
 ### Quick start
 
 ```js
