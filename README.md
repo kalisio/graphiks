@@ -9,7 +9,8 @@ It provides a simple factory pattern that lets you register your own shape gener
 
 ## Principle
 
-**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available here.
+**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here]().
+
 Any shapes can be customized with the following specifications:
 
 | Property | Description | Default |
@@ -24,7 +25,7 @@ Any shapes can be customized with the following specifications:
 | **text** | specifies the text parameters to be grouped with the shape. Refer to the description above. | `undefined` |
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the shape | `undefined` |
 
-* **stroke** sub-object:
+ ### **stroke** sub-object:
 
 | Property | Description | Default |
 |---|---|---|
@@ -39,7 +40,7 @@ Any shapes can be customized with the following specifications:
 
 > Note: If the **color** is set to `transparent`, the stroke properties are ignored.
 
-* **icon** sub-object:
+### **icon** sub-object:
 
 | Property | Description | Default |
 |---|---|---|
@@ -51,7 +52,7 @@ Any shapes can be customized with the following specifications:
 
 > Note: If the **classes** property is `undefined`, the icon properties are ignored.
 
-* **text** sub-object:
+ ### **text** sub-object:
 
 | Property | Description | Default |
 |---|---|---|
@@ -76,8 +77,8 @@ const graphiks = Graphiks()
 // create the shape with the required paramaters
 const star4 = graphiks('star4', { fill: 'orange', stroke: { red } })
 // add the shape to the dom
-const container = document.getElementById('#star5-container')
-container.appendChild(star5.toSVG())
+const container = document.getElementById('#star4-container')
+container.appendChild(star4.toSVG())
 ```
 
 ## Usage
