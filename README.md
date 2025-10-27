@@ -24,8 +24,8 @@ Any shapes can be customized with the following specifications:
 | **color** | specifies the color used to render the shape. It must be any HTML color. | `black`|
 | **opacity** | specifies the opacity used to render the shape. It must ranges from 0.0 (transparent) to 1.0 (opaque) | `1.0` |
 | **stroke** | specifies the stroke parameters to render the shape. Refer to the description above. | `undefined` |
-| **icon** | specifies the icon parameters to be grouped with the shape. Refer to the description above. | `undefined` |
-| **text** | specifies the text parameters to be grouped with the shape. Refer to the description above. | `undefined` |
+| **icon** | specifies an icon element to be grouped with the shape. Refer to the description above. | `undefined` |
+| **text** | specifies an text element to be grouped with the shape. Refer to the description above. | `undefined` |
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the shape | `undefined` |
 
  #### **stroke** sub-object
@@ -34,14 +34,15 @@ Any shapes can be customized with the following specifications:
 |---|---|---|
 | **width** | specifies the width used to render the stroke.
 | **color** | specifies the color used to render the stroke. It must be any HTML color. | `black`|
-| **opacity** | specifies the opacity used to render the stroke. It must ranges from 0.0 (transparent) to 1.0 (opaque) | `1.0` |
-| **cap** | : 'round', // see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap | `round` |
-| **join** | 'round', // see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin | `round` |
-| **dashArray** | 'none', // see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray | `none` |
-| **dashOffset** | 0 // see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset | `0` |
-| **miterLimit** |  4 // see https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-miterlimit | `4` |
+| **opacity** | specifies the opacity used to render the stroke. It must ranges from 0.0 (transparent) to 1.0 (opaque). | `1.0` |
+| **cap** | specifies the [style](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap) to be used at the end of open subpaths. | `round` |
+| **join** | specifies the [style](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin) to be used at the corners of paths. | `round` |
+| **dashArray** | specifies  the [pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray) of dashes and gaps used to render the stroke. | `none` |
+| **dashOffset** | specifies an [offset](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset) on the rendering of the associated dash array. | `0` |
+| **miterLimit** | specifies a  [limit](ttps://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-miterlimit) on the ratio of the miter length to the stroke width used to draw a miter join. | `4` |
 
-> Note: If the **color** is set to `transparent`, the stroke properties are ignored.
+> [!NOTE]
+> If the **color** is set to `transparent`, the stroke properties are ignored.
 
 #### **icon** sub-object
 
@@ -53,7 +54,8 @@ Any shapes can be customized with the following specifications:
 | **size** | specifies the [font size](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/font-size) used to render the icon | `1em` |
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the icon | `undefined` |
 
-> Note: If the **classes** property is `undefined`, the icon properties are ignored.
+> [!NOTE]
+> If the **classes** property is `undefined`, the icon properties are ignored.
 
  #### **text** sub-object
 
@@ -69,7 +71,8 @@ Any shapes can be customized with the following specifications:
 | **variant** | specifies the [font variant](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/font-weight) used to render the text | `normal` |
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the text | `undefined` |
 
-> Note: If the **label** property is `undefined`, the text properties are ignored.
+> [!NOTE]
+> If the **label** property is `undefined`, the text properties are ignored.
 
 For instance, to create an orange four-pointed star with a red stroke, it’s as simple as this:
 
@@ -83,6 +86,8 @@ const star4 = graphiks('star4', { fill: 'orange', stroke: { red } })
 const container = document.getElementById('#star4-container')
 container.appendChild(star4.toSVG())
 ```
+> [!IMPORTANT]
+> Some shapes expose additional properties that allow further customization.
 
 ## Usage
 
