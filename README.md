@@ -1,5 +1,8 @@
 # graphiks
 
+[![Latest Release](https://img.shields.io/github/v/tag/kalisio/graphiks?sort=semver&label=latest)](https://github.com/kalisio/graphiks/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 > A minimal parametric shape factory for SVG graphics — built in pure JavaScript.
 
 **Graphiks** is a lightweight and extensible library for creating, composing, and rendering parametric shapes using **SVG**.
@@ -25,7 +28,7 @@ Any shapes can be customized with the following specifications:
 | **text** | specifies the text parameters to be grouped with the shape. Refer to the description above. | `undefined` |
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the shape | `undefined` |
 
- ### **stroke** sub-object:
+ #### **stroke** sub-object
 
 | Property | Description | Default |
 |---|---|---|
@@ -40,7 +43,7 @@ Any shapes can be customized with the following specifications:
 
 > Note: If the **color** is set to `transparent`, the stroke properties are ignored.
 
-### **icon** sub-object:
+#### **icon** sub-object
 
 | Property | Description | Default |
 |---|---|---|
@@ -52,7 +55,7 @@ Any shapes can be customized with the following specifications:
 
 > Note: If the **classes** property is `undefined`, the icon properties are ignored.
 
- ### **text** sub-object:
+ #### **text** sub-object
 
 | Property | Description | Default |
 |---|---|---|
