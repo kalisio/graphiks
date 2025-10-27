@@ -30,14 +30,8 @@ export function triangle (params) {
   }
 }
 
-export function triangleUp (params) {
-  return triangle({
-    ...params
-  })
-}
-
 export function triangleDown (params) {
-  return triangleUp({
+  return triangle({
     ...params,
     transform: {
       rotate: [180, 50, 50]
@@ -46,7 +40,7 @@ export function triangleDown (params) {
 }
 
 export function triangleRight (params) {
-  return triangleUp({
+  return triangle({
     ...params,
     transform: {
       rotate: [90, 50, 50]
@@ -55,7 +49,7 @@ export function triangleRight (params) {
 }
 
 export function triangleLeft (params) {
-  return triangleUp({
+  return triangle({
     ...params,
     transform: {
       rotate: [270, 50, 50]

@@ -8,7 +8,7 @@ import { markerPin, squarePin } from './shapes/pin.js'
 import { pentagon, hexagon, polygon } from './shapes/polygon.js'
 import { rect, roundedRect } from './shapes/rect.js'
 import { star4, star5, star6 } from './shapes/star.js'
-import { triangle, triangleUp, triangleDown, triangleRight, triangleLeft } from './shapes/triangle.js'
+import { triangle, triangleDown, triangleRight, triangleLeft } from './shapes/triangle.js'
 
 const SHAPES = {
   circle,
@@ -26,7 +26,6 @@ const SHAPES = {
   star5,
   star6,
   triangle,
-  'triangle-up': triangleUp,
   'triangle-down': triangleDown,
   'triangle-right': triangleRight,
   'triangle-left': triangleLeft,

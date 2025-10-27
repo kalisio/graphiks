@@ -1,4 +1,4 @@
-import { Graphiks } from '../src/graphiks.js'
+import { graphiks } from '../src/graphiks.js'
 
 const shapes = [
   {
@@ -39,7 +39,7 @@ const shapes = [
     stroke: { color: 'orange', width: 3 }
   },
   {
-    shape: 'triangle-up',
+    shape: 'triangle',
     color: 'blue',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
@@ -155,7 +155,7 @@ const shapes = [
     stroke: { color: 'orange', width: 1 }
   }
 ]
-
+const Graphiks = graphiks({ loglevel: 'debug' })
 for (const shapeParams of shapes) {
   const shapeObj = Graphiks.renderShape({
     ...shapeParams,

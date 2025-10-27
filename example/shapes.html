@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphiks shapes</title>
+  <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css">
+</head>
+<body>
+  <h1 class="flex flex-row justify-content-center">Graphiks shapes</h1>
+  <div id="shapes" class="grid"></div>
+  <script  type="module">
+    import { graphiks } from '../src/graphiks.js'
+    const Graphiks = graphiks()
+    const shapes = Graphiks.listShapes()
+    const grid = document.getElementById('shapes')
+    shapes.forEach(shape => {
+      const div = document.createElement('div')
+      div.id = shape
+      div.className = 'col-4 md:col-2 lg:col-1 text-center p-4'
+      grid.appendChild(div)
+    })
+  </script>
+  <script type="module" src="./shapes.js"></script>
+</body>
+</html>

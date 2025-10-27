@@ -12,7 +12,7 @@ It provides a simple factory pattern that lets you register your own shape gener
 
 ## Principle
 
-**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here]().
+**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here](https://kalisio.github.io/graphiks/example/shapes.html).
 
 Any shapes can be customized with the following specifications:
 
@@ -20,7 +20,7 @@ Any shapes can be customized with the following specifications:
 |---|---|---|
 | **shape** | specifies the shape identifier to create |
 | **size** | specifies the size of the shape. It must be an array of HTML sizes | `'24px', '24px']`|
-| **radius** | specifies an alternate way to define the size of the shape. | `undefined' |
+| **radius** | specifies an alternate way to define the size of the shape. Each shape implements a function that converts a radius into a size. | `undefined' |
 | **color** | specifies the color used to render the shape. It must be any HTML color. | `black`|
 | **opacity** | specifies the opacity used to render the shape. It must ranges from 0.0 (transparent) to 1.0 (opaque) | `1.0` |
 | **stroke** | specifies the stroke parameters to render the shape. Refer to the description above. | `undefined` |
@@ -112,21 +112,6 @@ Or use it directly from a CDN:
   import { Graphiks } from 'https://unpkg.com/@kalisio/graphiks/dist/graphiks.es.js'
 </script>
 ```
-### Quick start
-
-```js
-import { Graphiks } from '@kalisio/graphiks'
-
-// create a factory instance
-const graphiks = Graphiks()
-
-// create an orange 4-point star with a red stroke
-const star4 = graphiks('star4', { fill: 'orange', stroke: { red } })
-
-// add the shape to the dom
-const container = document.getElementById('#star5-container')
-container.appendChild(star5.toSVG())
-```
 
 ### Examples
 
@@ -134,23 +119,25 @@ Open the [live example page](https://kalisio.github.io/graphiks/example/index.ht
 
 ## API Reference
 
-### Graphiks()
+### graphiks (options)
 
-Creates a new factory instance.
+The main function to manage and manipulate graphical shapes in your application. It provides methods to list, check, register, and render shapes.
 
-Returns a callable function:
+Arguments are:
 
-```js
-const graphiks = Graphiks()
-const shape = graphiks(type, options)
-```
+| Argument | Type | Description |
+| --- | --- | --- |
+| `options` | `Object` (optional) | Configuration object |
+| `options.loglevel` | `string` | Logging level. Possible values are `debug`, `info`, `warn`, `error`. Default value is `warn`. |
 
-| Method                                 | Description                                |
-| -------------------------------------- | ------------------------------------------ |
-| `graphiks.register(type, generatorFn)` | Registers a new shape generator            |
-| `graphiks.list()`                      | Returns all registered shape types         |
-| `graphiks(type, options)`              | Creates a shape instance as an SVG element |
+It returns a object containing the following methods:
 
+| Method | Description |
+|---|---|
+| **listShapes** | Returns a list of all shape types currently registered. |
+| **haShape (type)** | Checks whether a specific shape type is registered. |
+| **registerShape (type, generatorFn)** | Registers a new shape. |
+| **renderShape (params)** | Generates and returns a shape based on the specified type and parameters. |
 
 ## License
 
