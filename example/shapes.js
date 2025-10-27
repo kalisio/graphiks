@@ -3,110 +3,110 @@ import { Graphiks } from '../src/graphiks.js'
 const shapes = [
   {
     shape: 'circle',
-    fill: 'red',
+    color: 'red',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 },
-    style: 'circle { fill: gold; stroke: maroon; stroke-width: 2px; }'
+    style: 'circle { color: gold; stroke: maroon; stroke-width: 2px; }'
   },
   {
     shape: 'cross',
-    fill: 'red',
+    color: 'red',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'heart',
-    fill: 'red',
+    color: 'red',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'rect',
-    fill: 'green',
+    color: 'green',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'rounded-rect',
-    fill: 'green',
+    color: 'green',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'diamond',
-    fill: 'green',
+    color: 'green',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'triangle-up',
-    fill: 'blue',
+    color: 'blue',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'triangle-down',
-    fill: 'blue',
+    color: 'blue',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'triangle-right',
-    fill: 'blue',
+    color: 'blue',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'triangle-left',
-    fill: 'blue',
+    color: 'blue',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'marker-pin',
-    fill: 'purple',
+    color: 'purple',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'square-pin',
-    fill: 'purple',
+    color: 'purple',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'star4',
-    fill: 'lime',
+    color: 'lime',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'star5',
-    fill: 'lime',
+    color: 'lime',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'star6',
-    fill: 'lime',
+    color: 'lime',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'pentagon',
-    fill: 'yellow',
+    color: 'yellow',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'hexagon',
-    fill: 'yellow',
+    color: 'yellow',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
   {
     shape: 'polygon',
-    fill: 'yellow',
+    color: 'yellow',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
@@ -115,20 +115,20 @@ const shapes = [
     slices: [{
       value: 10,
       label: 'a',
-      fill: 'red',
+      color: 'red',
       opacity: 0.75
     }, {
       value: 25,
       label: 'b',
-      fill: 'green',
+      color: 'green',
       opacity: 0.75
     }, {
       value: 18,
       label: 'c',
-      fill: 'blue',
+      color: 'blue',
       opacity: 0.75
     }],
-    fill: 'magenta',
+    color: 'magenta',
     opacity: 0.5,
     stroke: { color: 'orange', width: 3 }
   },
@@ -137,20 +137,20 @@ const shapes = [
     slices: [{
       value: 10,
       label: 'a',
-      fill: 'red',
+      color: 'red',
       opacity: 0.75
     }, {
       value: 25,
       label: 'b',
-      fill: 'green',
+      color: 'green',
       opacity: 0.75
     }, {
       value: 18,
       label: 'c',
-      fill: 'blue',
+      color: 'blue',
       opacity: 0.75
     }],
-    fill: 'magenta',
+    color: 'magenta',
     opacity: 0.5,
     stroke: { color: 'orange', width: 1 }
   }
@@ -161,7 +161,7 @@ for (const shapeParams of shapes) {
     ...shapeParams,
     text: {
       label: shapeParams.shape,
-      fontSize: '2em',
+      size: '2em',
       transform: { translate: [50, 140] }
     }
   })

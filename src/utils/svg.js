@@ -25,7 +25,7 @@ export function toSVGStyleElement (style) {
 
 export function toSVGTextElement (text) {
   if (!text || !text.label) return ''
-  return `<text ${toSVGTextAtributes(text)}>${text.label}</text>`
+  return `<text ${toSVGTextAttributes(text)}>${text.label}</text>`
 }
 
 export function toSVGIconElement (icon) {
@@ -46,10 +46,14 @@ export function toSVGAttributes (params) {
   return attrs.trim()
 }
 
-export function toSVGTextAtributes (params) {
+export function toSVGTextAttributes (params) {
   if (!params) return ''
   let attrs = 'text-anchor="middle" alignment-baseline="central" '
-  attrs += `font-size="${params.fontSize ?? '1em'}" `
+  attrs += `font-size="${params.size ?? '1em'}" `
+  if (params.font) attrs += `font-family: "${params.font}" `
+  if (params.style) attrs += `font-style: "${params.style}" `
+  if (params.weight) attrs += `font-weight: "${params.weight}" `
+  if (params.variant) attrs += `font-variant: "${params.variant}" `
   if (params.transform) attrs += toSVGTransformAttribute(params.transform)
   return attrs.trim()
 }
@@ -57,22 +61,21 @@ export function toSVGTextAtributes (params) {
 export function toSVGStyleAttributes (params) {
   if (!params) return ''
   let attrs = ''
-  if (params.fill) attrs += `fill="${params.fill}" `
+  if (params.color) attrs += `fill="${params.color}" `
   if (params.opacity) attrs += `fill-opacity="${params.opacity}" `
   if (params.stroke) attrs += toSVGStrokeAttributes(params.stroke)
   return attrs.trim()
 }
 
 export function toSVGStrokeAttributes (stroke) {
-  if (!stroke.color || stroke.color === 'transparent') return ''
-  let attrs = `stroke="${stroke.color}" `
-  attrs += 'vector-effect="non-scaling-stroke" '
+  if (stroke.color === 'transparent') return ''
+  let attrs = 'vector-effect="non-scaling-stroke" '
+  attrs += `stroke-width="${stroke.width || '1px'}" `
+  attrs += `stroke="${stroke.color || 'black'}" `
   if (stroke.opacity) attrs += `stroke-opacity="${stroke.opacity}" `
-  if (stroke.width) attrs += `stroke-width="${stroke.width}" `
   if (stroke.dashArray) attrs += `stroke-dasharray="${stroke.dashArray}" `
   if (stroke.dashOffset) attrs += `stroke-dashoffset="${stroke.dashOffset}" `
   if (stroke.lineCap) attrs += `stroke-linecap="${stroke.lineCap}" `
-  if (stroke.lineJoin) attrs += `stroke-linejoin="${stroke.lineJoin}" `
   if (stroke.lineJoin) attrs += `stroke-linejoin="${stroke.lineJoin}" `
   if (stroke.miterLimit) attrs += `stroke-miterlimit="${stroke.miterLimit}"`
   return attrs.trim()
