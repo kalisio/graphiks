@@ -3,33 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graphiks examples</title>
+  <title>Graphiks shapes</title>
   <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css">
 </head>
 <body>
-  <h1 class="flex flex-row justify-content-center">Graphiks examples</h1>
-  <div class="grid">
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="circle"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="cross"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="heart"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="rect"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="rounded-rect"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="diamond"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="triangle-up"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="triangle-down"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="triangle-right"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="triangle-left"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="marker-pin"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="square-pin"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="star4"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="star5"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="star6"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="pentagon"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="hexagon"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="polygon"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="donut"></div>
-    <div class="col-4 md:col-2 lg:col-1 text-center p-4" id="pie"></div>
-  </div>
+  <h1 class="flex flex-row justify-content-center">Graphiks shapes</h1>
+  <div id="shapes" class="grid"></div>
+  <script  type="module">
+    import { graphiks } from '../src/graphiks.js'
+    const Graphiks = graphiks()
+    const shapes = Graphiks.listShapes()
+    const grid = document.getElementById('shapes')
+    shapes.forEach(shape => {
+      const div = document.createElement('div')
+      div.id = shape
+      div.className = 'col-4 md:col-2 lg:col-1 text-center p-4'
+      grid.appendChild(div)
+    })
+  </script>
   <script type="module" src="./shapes.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@ It provides a simple factory pattern that lets you register your own shape gener
 
 ## Principle
 
-**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here](https://kalisio.github.io/graphiks/example/shapes.html).
+**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here](https://kalisio.github.io/graphiks/example/index.html).
 
 Any shapes can be customized with the following specifications:
 
@@ -121,16 +121,7 @@ Open the [live example page](https://kalisio.github.io/graphiks/example/index.ht
 
 ### graphiks (options)
 
-The main function to manage and manipulate graphical shapes in your application. It provides methods to list, check, register, and render shapes.
-
-Arguments are:
-
-| Argument | Type | Description |
-| --- | --- | --- |
-| `options` | `Object` (optional) | Configuration object |
-| `options.loglevel` | `string` | Logging level. Possible values are `debug`, `info`, `warn`, `error`. Default value is `warn`. |
-
-It returns a object containing the following methods:
+The main function to manage and manipulate graphical shapes in your application. It returns a object containing the following methods:
 
 | Method | Description |
 |---|---|
@@ -138,6 +129,13 @@ It returns a object containing the following methods:
 | **haShape (type)** | Checks whether a specific shape type is registered. |
 | **registerShape (type, generatorFn)** | Registers a new shape. |
 | **renderShape (params)** | Generates and returns a shape based on the specified type and parameters. |
+
+The function takes the following parameters:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `options` | `Object` (optional) | Configuration object |
+| `options.loglevel` | `string` | Logging level. Possible values are `debug`, `info`, `warn`, `error`. Default value is `warn`. |
 
 ## License
 
