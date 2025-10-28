@@ -46,12 +46,12 @@ export function toSVGIconElement (params) {
   const { icon, height } = params
   if (!icon || (!icon.classes && !icon.url)) return ''
   const fontScale = 100 / height
-  const size = (text.size ?? 12) * fontScale
+  const size = (icon.size ?? 12) * fontScale
   let iconStyle = `font-size: ${size}px;`
   if (icon.color) iconStyle += `color=${icon.color};`
-  let iconElement = `<i style="${iconStyle}" class="${icon.classes}"</i>`
+  const iconElement = `<i style="${iconStyle}" class="${icon.classes}"</i>`
   const divStyle = 'display:flex;align-items:center;justify-content:center;height:100%;width:100%;'
-  let divElement = `<div xmlns="http://www.w3.org/1999/xhtml" style="${divStyle}">${iconElement}</div>`
+  const divElement = `<div xmlns="http://www.w3.org/1999/xhtml" style="${divStyle}">${iconElement}</div>`
   return `<foreignObject width="100" height="100">${divElement}</foreignObject>`
 }
 
@@ -106,4 +106,3 @@ export function toSVGTransformAttribute (transform) {
   attr += '"'
   return attr.trim()
 }
-

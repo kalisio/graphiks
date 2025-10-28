@@ -38,7 +38,10 @@
   "standard": {
     "parserOptions": {
       "sourceType": "module"
-    }
+    },
+    "globals": [
+      "Vue"
+    ]
   },
   "publishConfig": {
     "access": "public"

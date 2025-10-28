@@ -1,4 +1,3 @@
-import { graphiks } from '../../src/graphiks.js'
 import Shape from './shape.js'
 
 export default {
@@ -15,9 +14,7 @@ export default {
   },
 
   setup () {
-    const Graphiks = graphiks()
-
-    function decoratedShape(shape) {
+    function decoratedShape (shape) {
       return {
         ...shape,
         label: shape.shape,
@@ -51,16 +48,22 @@ export default {
         { shape: 'pentagon', color: 'yellow' },
         { shape: 'hexagon', color: 'yellow' },
         { shape: 'polygon', color: 'yellow' },
-        { shape: 'donut', slices: [
-          { value: 10, label: 'slice a', color: 'red' },
-          { value: 25, label: 'slice b', color: 'green' },
-          { value: 18, label: 'slice c', color: 'blue' }
-        ]},
-        { shape: 'pie', slices: [
-          { value: 12, label: 'slice a', color: 'red' },
-          { value: 30, label: 'slice b', color: 'green' },
-          { value: 10, label: 'slice c', color: 'blue' }
-        ]}
+        {
+          shape: 'donut',
+          slices: [
+            { value: 10, label: 'slice a', color: 'red' },
+            { value: 25, label: 'slice b', color: 'green' },
+            { value: 18, label: 'slice c', color: 'blue' }
+          ]
+        },
+        {
+          shape: 'pie',
+          slices: [
+            { value: 12, label: 'slice a', color: 'red' },
+            { value: 30, label: 'slice b', color: 'green' },
+            { value: 10, label: 'slice c', color: 'blue' }
+          ]
+        }
       ]
     }
   }
