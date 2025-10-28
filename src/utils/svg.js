@@ -12,8 +12,9 @@ export function toSVGElement (params) {
   }
   const shapeElement = params.shape
   const styleElement = toSVGStyleElement(params.style)
-  const textElement = toSVGTextElement(params.text)
-  const iconElement = toSVGIconElement(params.icon)
+  const scaleFontRatio = 100 / params.height
+  const textElement = toSVGTextElement(params.text, scaleFontRatio)
+  const iconElement = toSVGIconElement(params.icon, scaleFontRatio)
   const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
   return `<svg ${toSVGAttributes(params)}>${styleElement}${groupElement}</svg>`
 }
@@ -23,16 +24,28 @@ export function toSVGStyleElement (style) {
   return `<style>${style}</style>`
 }
 
-export function toSVGTextElement (text) {
+export function toSVGTextElement (text, scaleFontRatio) {
   if (!text || !text.label) return ''
-  return `<text ${toSVGTextAttributes(text)}>${text.label}</text>`
+  let attrs = 'text-anchor="middle" alignment-baseline="central" '
+  let size = (text.size ?? 14) * scaleFontRatio
+  attrs += `font-size="${size}px"`
+  if (text.color) attrs += ` fill: "${text.color}"`
+  if (text.font) attrs += ` font-family: "${text.font}"`
+  if (text.style) attrs += ` font-style: "${text.style}"`
+  if (text.weight) attrs += ` font-weight: "${text.weight}"`
+  if (text.variant) attrs += ` font-variant: "${text.variant}"`
+  if (text.transform) attrs += ` ${toSVGTransformAttribute(text.transform)}`
+  return `<text ${attrs}>${text.label}</text>`
 }
 
-export function toSVGIconElement (icon) {
-  if (!icon || !icon.classes) return ''
-  const transformAttr = toSVGTransformAttribute(icon.transform)
-  const attrs = `${transformAttr}`
-  return `<foreignObject ${attrs}><i class="${icon.classes}"></i></foreignObject>`
+export function toSVGIconElement (icon, scaleFontRatio) {
+  if (!icon || (!icon.classes && !icon.url)) return ''
+  let fontSize = (icon.size ?? 24) * scaleFontRatio
+  let style = "font-size: ${fontSize}px;"
+  if (icon.color) style += ' '
+  let iconElement = `<i style="font-size: ${fontSize}px; color: ${icon.color}" class="${icon.classes}"</i>`
+  let divElement = `<div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;height:100%;width:100%;">${iconElement}</div>`
+  return `<foreignObject width="100" height="100">${divElement}</foreignObject>`
 }
 
 export function toSVGAttributes (params) {
@@ -43,19 +56,7 @@ export function toSVGAttributes (params) {
   attrs += ` viewBox="${0 - margin / 2} ${0 - margin / 2} ${100 + margin} ${100 + margin}"`
   attrs += ' preserveAspectRatio="none"'
   attrs += ' overflow="visible"'
-  return attrs.trim()
-}
-
-export function toSVGTextAttributes (params) {
-  if (!params) return ''
-  let attrs = 'text-anchor="middle" alignment-baseline="central" '
-  attrs += `font-size="${params.size ?? '1em'}" `
-  if (params.font) attrs += `font-family: "${params.font}" `
-  if (params.style) attrs += `font-style: "${params.style}" `
-  if (params.weight) attrs += `font-weight: "${params.weight}" `
-  if (params.variant) attrs += `font-variant: "${params.variant}" `
-  if (params.transform) attrs += toSVGTransformAttribute(params.transform)
-  return attrs.trim()
+  return attrs
 }
 
 export function toSVGStyleAttributes (params) {
@@ -84,11 +85,12 @@ export function toSVGStrokeAttributes (stroke) {
 export function toSVGTransformAttribute (transform) {
   if (!transform) return ''
   let attr = 'transform="'
-  if (transform.rotate) attr += `rotate(${transform.rotate.join(' ')}) `
-  if (transform.translate) attr += `translate(${transform.translate.join(' ')}) `
-  if (transform.scale) attr += `scale(${transform.scale.join(' ')}) `
-  if (transform.skewX) attr += `skewX(${transform.skewX}) `
-  if (transform.skewY) attr += `skewY(${transform.skewY})`
+  if (transform.rotate) attr += `rotate(${transform.rotate.join(' ')})`
+  if (transform.translate) attr += ` translate(${transform.translate.join(' ')})`
+  if (transform.scale) attr += ` scale(${transform.scale.join(' ')})`
+  if (transform.skewX) attr += ` skewX(${transform.skewX})`
+  if (transform.skewY) attr += ` skewY(${transform.skewY})`
   attr += '"'
   return attr.trim()
 }
+

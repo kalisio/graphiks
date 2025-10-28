@@ -2,6 +2,7 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/quasar@2.18.5/dist/quasar.prod.css" rel="stylesheet" type="text/css">
   </head>
 
@@ -10,11 +11,14 @@
     <div id="q-app">
       <q-layout view="lhh LpR lff">
         <q-header class="q-pa-md">
-          <span class="text-h6">Graphiks</span>
+          <div class="full-width row items-center q-gutter-x-md">
+            <q-icon name="category" size="sm"></q-icon>
+            <div class="text-h5">Graphiks</div>
+          </div>
         </q-header>
         <q-page-container>
-          <q-page class="q-pa-md">
-            <div id="shapes" class="row"></div>
+          <q-page padding>
+            <Shapes></Shapes>
           </q-page>
         </q-page-container>
       </q-layout>
@@ -23,28 +27,16 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@2.18.5/dist/quasar.umd.prod.js"></script>
-
     <script type="module">
-      import { graphiks } from '../src/graphiks.js'
-      // create the app
+      import Shapes from './components/shapes.js'
       const app = Vue.createApp({
-        setup () {
-          return {}
-        }
+        components: {
+          Shapes
+        },
+        setup () {}
       })
       app.use(Quasar)
       app.mount('#q-app')
-      // create the shapes
-      const Graphiks = graphiks()
-      const shapes = Graphiks.listShapes()
-      const grid = document.getElementById('shapes')
-      shapes.forEach(shape => {
-        const div = document.createElement('div')
-        div.id = shape
-        div.className = 'q-pa-md col-xs-4 col-sm-3 col-md-2 col-lg-1 text-center'
-        grid.appendChild(div)
-      })
     </script>
-    <script type="module" src="./shapes.js"></script>
   </body>
 </html>
