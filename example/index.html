@@ -18,7 +18,7 @@
         </q-header>
         <q-page-container>
           <q-page padding>
-            <Shapes></Shapes>
+            <shape-collection></shape-collection>
           </q-page>
         </q-page-container>
       </q-layout>
@@ -28,10 +28,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@2.18.5/dist/quasar.umd.prod.js"></script>
     <script type="module">
-      import Shapes from './components/shapes.js'
+      import ShapeCollection from './components/shape-collection.js'
       const app = Vue.createApp({
         components: {
-          Shapes
+          ShapeCollection
         },
         setup () {}
       })
