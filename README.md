@@ -26,7 +26,8 @@ Any shapes can be customized with the following specifications:
 | **stroke** | specifies the stroke parameters to render the shape. Refer to the description above. | `undefined` |
 | **icon** | specifies an icon element to be grouped with the shape. Refer to the description above. | `undefined` |
 | **text** | specifies an text element to be grouped with the shape. Refer to the description above. | `undefined` |
-| **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the shape | `undefined` |
+| **style** | specifies a [style](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/style) element to be assigned to the shape | `undefined` |
+| **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) attribute used to render the shape | `undefined` |
 
  #### **stroke** sub-object
 
