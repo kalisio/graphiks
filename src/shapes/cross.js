@@ -1,4 +1,4 @@
-import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTitleElement, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -13,7 +13,7 @@ export function cross (params) {
       `<path d="M35 0 L65 0 L65 35 L100 35 L100 65 L65 65 L65 100 L35 100 L35 65 L0 65 L0 35 L35 35 Z"
         ${toSVGStyleAttributes(params)}
         ${toSVGTransformAttribute(params.transform)}
-      />`,
+      >${toSVGTitleElement(params)}</path>`,
     icon: {
       transform: {
         translate: [50, 50]

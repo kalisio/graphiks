@@ -1,5 +1,5 @@
 import { Logger } from '../utils/logger.js'
-import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTitleElement, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -44,7 +44,8 @@ export function donut (params) {
       A ${innerRadius} ${innerRadius} 0 1 0 ${center} ${center - innerRadius}
     `
     const styleAttrs = toSVGStyleAttributes(params)
-    shape = `<path d="${pathData.trim()}" ${styleAttrs}><title>${slice.label}</title></path>`
+    const titleElement = toSVGTitleElement(slice)
+    shape = `<path d="${pathData.trim()}" ${styleAttrs}>${titleElement}</path>`
   } else {
     for (const slice of params.slices) {
       const percentage = slice.value / sum
@@ -73,7 +74,8 @@ export function donut (params) {
           Z
         `
         const styleAttrs = toSVGStyleAttributes({ ...slice, stroke: params.stroke })
-        shape += `<path d="${pathData.trim()}" ${styleAttrs} class="graphiks-donut-slice"><title>${slice.label}</title></path>`
+        const titleElement = toSVGTitleElement(slice)
+        shape += `<path d="${pathData.trim()}" ${styleAttrs} class="graphiks-donut-slice">${titleElement}</path>`
         currentAngle += angle
       }
     }

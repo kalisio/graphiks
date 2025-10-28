@@ -1,6 +1,9 @@
 import { Logger } from './logger.js'
 
 export function toSVGElement (params) {
+  if (!params) {
+    Logger.error('Invalid argument: \'params\' must be defined')
+  }
   if (!params.width) {
     Logger.error('Invalid argument: \'params.width\' must be defined')
   }
@@ -11,24 +14,25 @@ export function toSVGElement (params) {
     Logger.error('Invalid argument: \'params.shape\' must be defined')
   }
   const shapeElement = params.shape
-  const styleElement = toSVGStyleElement(params.style)
-  const scaleFontRatio = 100 / params.height
-  const textElement = toSVGTextElement(params.text, scaleFontRatio)
-  const iconElement = toSVGIconElement(params.icon, scaleFontRatio)
+  const styleElement = toSVGStyleElement(params)
+  const textElement = toSVGTextElement(params)
+  const iconElement = toSVGIconElement(params)
   const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
   return `<svg ${toSVGAttributes(params)}>${styleElement}${groupElement}</svg>`
 }
 
-export function toSVGStyleElement (style) {
+export function toSVGStyleElement (params) {
+  const { style } = params
   if (!style) return ''
-  return `<style>${style}</style>`
+  return `<style>${params.style}</style>`
 }
 
-export function toSVGTextElement (text, scaleFontRatio) {
+export function toSVGTextElement (params) {
+  const { text, height } = params
   if (!text || !text.label) return ''
-  let attrs = 'text-anchor="middle" alignment-baseline="central" '
-  let size = (text.size ?? 14) * scaleFontRatio
-  attrs += `font-size="${size}px"`
+  const fontScale = 100 / height
+  const size = (text.size ?? 12) * fontScale
+  let attrs = `text-anchor="middle" alignment-baseline="central" font-size="${size}px"`
   if (text.color) attrs += ` fill: "${text.color}"`
   if (text.font) attrs += ` font-family: "${text.font}"`
   if (text.style) attrs += ` font-style: "${text.style}"`
@@ -38,14 +42,23 @@ export function toSVGTextElement (text, scaleFontRatio) {
   return `<text ${attrs}>${text.label}</text>`
 }
 
-export function toSVGIconElement (icon, scaleFontRatio) {
+export function toSVGIconElement (params) {
+  const { icon, height } = params
   if (!icon || (!icon.classes && !icon.url)) return ''
-  let fontSize = (icon.size ?? 24) * scaleFontRatio
-  let style = "font-size: ${fontSize}px;"
-  if (icon.color) style += ' '
-  let iconElement = `<i style="font-size: ${fontSize}px; color: ${icon.color}" class="${icon.classes}"</i>`
-  let divElement = `<div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;height:100%;width:100%;">${iconElement}</div>`
+  const fontScale = 100 / height
+  const size = (text.size ?? 12) * fontScale
+  let iconStyle = `font-size: ${size}px;`
+  if (icon.color) iconStyle += `color=${icon.color};`
+  let iconElement = `<i style="${iconStyle}" class="${icon.classes}"</i>`
+  const divStyle = 'display:flex;align-items:center;justify-content:center;height:100%;width:100%;'
+  let divElement = `<div xmlns="http://www.w3.org/1999/xhtml" style="${divStyle}">${iconElement}</div>`
   return `<foreignObject width="100" height="100">${divElement}</foreignObject>`
+}
+
+export function toSVGTitleElement (params) {
+  const { label } = params
+  if (!label) return ''
+  return `<title>${label}</title>`
 }
 
 export function toSVGAttributes (params) {

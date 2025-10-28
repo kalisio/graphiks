@@ -20,6 +20,7 @@ export default {
     function decoratedShape(shape) {
       return {
         ...shape,
+        label: shape.shape,
         stroke: {},
         text: {
           label: shape.shape,

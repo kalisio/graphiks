@@ -1,4 +1,4 @@
-import { toSVGStyleAttributes, toSVGTransformAttribute } from '../utils/svg.js'
+import { toSVGStyleAttributes, toSVGTitleElement,toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
@@ -13,7 +13,7 @@ export function circle (params) {
       `<circle cx="50" cy="50" r="50"
         ${toSVGStyleAttributes(params)}
         ${toSVGTransformAttribute(params.transform)}
-      />`,
+      >${toSVGTitleElement(params)}</circle>`,
     icon: {
       transform: {
         translate: [50, 50]
