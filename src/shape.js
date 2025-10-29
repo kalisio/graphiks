@@ -16,5 +16,23 @@ export function Shape (params) {
     return svg
   }
 
+  shape.toPNG = async () => {
+    const svgBlob = new Blob([shape.toSVG()], { type: "image/svg+xml" })
+    const url = URL.createObjectURL(svgBlob)
+    const img = await new Promise((resolve) => {
+      const image = new Image()
+      image.onload = () => resolve(image)
+      image.src = url
+    })
+    const canvas = document.createElement("canvas")
+    canvas.width = img.width
+    canvas.height = img.height
+    const ctx = canvas.getContext("2d")
+    ctx.drawImage(img, 0, 0)
+    const png = canvas.toDataURL("image/png")
+    URL.revokeObjectURL(url)
+    return png
+  }
+  
   return shape
 }

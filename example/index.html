@@ -11,10 +11,7 @@
     <div id="q-app">
       <q-layout view="lhh LpR lff">
         <q-header class="q-pa-md">
-          <div class="full-width row items-center q-gutter-x-md">
-            <q-icon name="category" size="sm"></q-icon>
-            <div class="text-h5">Graphiks</div>
-          </div>
+          <banner></banner>
         </q-header>
         <q-page-container>
           <q-page padding>
@@ -28,9 +25,11 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@2.18.5/dist/quasar.umd.prod.js"></script>
     <script type="module">
+      import Banner from './components/banner.js'
       import ShapeCollection from './components/shape-collection.js'
       const app = Vue.createApp({
         components: {
+          Banner,
           ShapeCollection
         },
         setup () {}
