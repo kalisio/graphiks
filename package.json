@@ -42,6 +42,9 @@
     "parserOptions": {
       "sourceType": "module"
     },
+    "env": [
+      "mocha"
+    ],
     "globals": [
       "Vue",
       "Image"
@@ -51,8 +54,8 @@
     "access": "public"
   },
   "devDependencies": {
+    "c8": "^10.1.3",
     "chai": "^6.2.2",
-    "chai-lint": "^0.1.1",
     "cross-env": "^10.1.0",
     "mocha": "^11.7.5",
     "standard": "^17.1.2",
