@@ -140,12 +140,8 @@ The function takes the following parameters:
 
 ## License
 
-Copyright (c) 2025-20xx Kalisio
-
 Licensed under the [MIT license](LICENSE).
 
-## Sponsors
+Copyright (c) 2017-20xx [Kalisio](https://kalisio.com)
 
-This project is sponsored by
-
-[![Kalisio](https://s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-black-256x84.png)](https://kalisio.com)
+[![Kalisio](https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-black-256x84.png)](https://kalisio.com)

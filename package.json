@@ -33,20 +33,28 @@
     "dev": "vite",
     "build": "vite build",
     "prepublishOnly": "npm run build",
-    "lint": "standard --fix"
+    "lint": "standard --fix",
+    "mocha": "cross-env NODE_CONFIG_DIR=./test/config/ mocha --exit --timeout 30000",
+    "coverage": "c8 npm run mocha",
+    "test": "npm run lint && npm run coverage"
   },
   "standard": {
     "parserOptions": {
       "sourceType": "module"
     },
     "globals": [
-      "Vue"
+      "Vue",
+      "Image"
     ]
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "chai": "^6.2.2",
+    "chai-lint": "^0.1.1",
+    "cross-env": "^10.1.0",
+    "mocha": "^11.7.5",
     "standard": "^17.1.2",
     "vite": "^7.1.9"
   }
