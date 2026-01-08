@@ -1,6 +1,9 @@
 # graphiks
 
 [![Latest Release](https://img.shields.io/github/v/tag/kalisio/graphiks?sort=semver&label=latest)](https://github.com/kalisio/graphiks/releases)
+[![Quality Gate Status](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-graphiks&metric=alert_status&token=sqb_f2e2b7a8f69e5f0dee3d4521759e51fbe9e4e38f)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-graphiks)
+[![Maintainability Issues](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-graphiks&metric=software_quality_maintainability_issues&token=sqb_f2e2b7a8f69e5f0dee3d4521759e51fbe9e4e38f)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-graphiks)
+[![Coverage](https://sonar.portal.kalisio.com/api/project_badges/measure?project=kalisio-graphiks&metric=coverage&token=sqb_f2e2b7a8f69e5f0dee3d4521759e51fbe9e4e38f)](https://sonar.portal.kalisio.com/dashboard?id=kalisio-graphiks)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > A minimal parametric shape factory for SVG graphics — built in pure JavaScript.
