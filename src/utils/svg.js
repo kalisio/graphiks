@@ -29,7 +29,7 @@ export function toSVGStyleElement (params) {
 
 export function toSVGTextElement (params) {
   const { text, height } = params
-  if (!text || !text.label) return ''
+  if (!text?.label) return ''
   const fontScale = 100 / height
   const size = (text.size ?? 12) * fontScale
   let attrs = `text-anchor="middle" alignment-baseline="central" font-size="${size}px"`

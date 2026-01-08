@@ -127,7 +127,7 @@ The main function to manage and manipulate graphical shapes in your application.
 | Method | Description |
 |---|---|
 | **listShapes** | Returns a list of all shape types currently registered. |
-| **haShape (type)** | Checks whether a specific shape type is registered. |
+| **hasShape (type)** | Checks whether a specific shape type is registered. |
 | **registerShape (type, generatorFn)** | Registers a new shape. |
 | **renderShape (params)** | Generates and returns a shape based on the specified type and parameters. |
 
