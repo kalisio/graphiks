@@ -5,13 +5,13 @@ import { Registry } from './registry.js'
 export function graphiks (options) {
   if (options?.loglevel) Logger.setLevel(options.loglevel)
   return {
-    listShapes () {
+    listShapeTypes () {
       return Registry.list()
     },
-    hasShape (type) {
+    hasShapeType (type) {
       return Registry.has(type)
     },
-    registerShape (type, generatorFn) {
+    registerShapeType (type, generatorFn) {
       Registry.register(type, generatorFn)
     },
     renderShape (params) {

@@ -50,17 +50,17 @@ describe('shapes', () => {
   })
 
   it('should list the shapes', () => {
-    const shapes = Graphiks.listShapes()
+    const shapes = Graphiks.listShapeTypes()
     expect(shapes).to.be.a('array')
   })
 
   it('should have the circle shape registered', () => {
-    const hasCircle = Graphiks.hasShape('circle')
+    const hasCircle = Graphiks.hasShapeType('circle')
     expect(hasCircle).to.equal(true)
   })
 
   it('should not have the dummy shape registered', () => {
-    const hasDummy = Graphiks.hasShape('dummy')
+    const hasDummy = Graphiks.hasShapeType('dummy')
     expect(hasDummy).to.equal(false)
   })
 
