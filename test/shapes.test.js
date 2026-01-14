@@ -67,7 +67,7 @@ describe('shapes', () => {
   it('should render the registered registered correctly', () => {
     for (const shape of BasicShapes) {
       const graphic = Graphiks.renderShape(shape)
-      expect(graphic).exist
+      expect(graphic).to.not.equal(null)
       if (MODE === 'run') {
         const svg = fs.readFileSync(`test/data/${shape.shape}.svg`, 'utf8')
         expect(graphic.toSVG()).to.equal(svg)
