@@ -27,6 +27,7 @@ export function cross (params) {
       },
       ...params.text
     },
-    style: params.style
+    style: params.style,
+    zoom: params.zoom
   }
 }

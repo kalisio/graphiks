@@ -1,6 +1,7 @@
 import { graphiks } from '../../src/graphiks.js'
 import ShapeRenderer from './shape-renderer.js'
 import ColorPicker from './color-picker.js'
+import OpacitySlider from './opacity-slider.js'
 
 export default {
   template: `
@@ -20,10 +21,13 @@ export default {
         </div>
         <div class="q-pa-sm col-4">
           <q-select class="q-pa-sm" v-model="shape.shape" :options="types" label="Type" />
-          <ColorPicker v-model="shape.color" label="Color" />
+          <div v-if="type !== 'donut' && type !== 'pie'">
+            <ColorPicker v-model="color"></ColorPicker>
+            <OpacitySlider v-model="opacity"></OpacitySlider>
+          </div>
         </div>
       </div>
-      <div class="q-pa-md relative-position bg-amber-2 text-subtitle2" style="white-space: pre-wrap;">
+      <div class="q-pa-md relative-position bg-grey-2 text-subtitle2" style="white-space: pre-wrap;">
         {{ code }}
         <q-btn
           flat
@@ -39,7 +43,8 @@ export default {
 
   components: {
     ShapeRenderer,
-    ColorPicker
+    ColorPicker,
+    OpacitySlider
   },
 
   setup () {
@@ -50,11 +55,20 @@ export default {
 
     const shape = ref({
       shape: 'circle',
-      size: [150, 150],
-      color: 'red',
+      zoom: 3,
+      color: 'orange',
+      opacity: 1.0,
       stroke: { color: 'black', width: 2 }
     })
     const types = Graphiks.listShapeTypes()
+    const color = ref('orange')
+    const opacity = ref(1.0)
+    const slices = ref([
+      { value: 25, label: 'slice A', color: 'red' },
+      { value: 25, label: 'slice B', color: 'orange' },
+      { value: 25, label: 'slice C', color: 'lime' },
+      { value: 25, label: 'slice D', color: 'green' }
+    ])
 
     const type = computed(() => {
       return shape.value?.shape
@@ -65,13 +79,20 @@ export default {
 
     watch(type, (value) => {
       if (value === 'pie' || value === 'donut') {
-        shape.value.slices = [
-          { value: 25, label: 'slice A', color: 'red' },
-          { value: 25, label: 'slice B', color: 'orange' },
-          { value: 25, label: 'slice C', color: 'lime' },
-          { value: 25, label: 'slice D', color: 'green' }
-        ]
-      } else delete shape.value.slices
+        shape.value.slices = slices.value
+        delete shape.value.color
+        delete shape.value.opacity
+      } else {
+        delete shape.value.slices
+        shape.value.color = color.value
+        shape.value.opacity = opacity.value
+      }
+    })
+    watch(color, (value) => {
+      if (shape.value.color) shape.value.color = value
+    })
+    watch(opacity, (value) => {
+      if (shape.value.opacity) shape.value.opacity = value
     })
 
     function copyToClipboard () {
@@ -114,6 +135,10 @@ export default {
     return {
       shape,
       types,
+      type,
+      color,
+      opacity,
+      slices,
       code,
       downloadAsPNG,
       copyToClipboard

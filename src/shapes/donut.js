@@ -102,7 +102,8 @@ export function donut (params) {
       },
       ...params.text
     },
-    style: params.style || DEFAULT_STYLE
+    style: params.style || DEFAULT_STYLE,
+    zoom: params.zoom
   }
 }
 

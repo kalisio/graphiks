@@ -27,6 +27,7 @@ export function circle (params) {
       },
       ...params.text
     },
-    style: params.style
+    style: params.style,
+    zoom: params.zoom
   }
 }

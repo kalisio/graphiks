@@ -28,7 +28,8 @@ export function markerPin (params) {
       ...params.text
     },
     style: params.style,
-    anchor: 'bottom-center'
+    anchor: 'bottom-center',
+    zoom: params.zoom
   }
 }
 
@@ -53,6 +54,7 @@ export function squarePin (params) {
       },
       ...params.text
     },
-    anchor: 'bottom-center'
+    anchor: 'bottom-center',
+    zoom: params.zoom
   }
 }

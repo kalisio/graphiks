@@ -16,7 +16,10 @@ export function Shape (params) {
   if (!Number.isFinite(params.margin) || params.margin < 0) {
     Logger.error('Invalid argument: \'params.margin\' must be a non-negative number')
   }
-  Logger.debug(`Shape created with ${JSON.stringify(params, null, 2)}`)
+  const zoom = params.zoom || 1
+  if (!Number.isFinite(zoom) || zoom <= 0) {
+    Logger.error('Invalid argument: \'params.zoom\' must be positive number')
+  }
 
   // toSVG function
   function toSVG () {
@@ -29,10 +32,12 @@ export function Shape (params) {
       }
     }
     // otherwise setup the svg string
+    const width = params.width * zoom
+    const height = params.height * zoom
     const margin = params.margin
     let attributes = 'xmlns="http://www.w3.org/2000/svg"'
-    attributes += ` width="${params.width}" height="${params.height}"`
-    attributes += ` viewBox="${0 - margin} ${0 - margin} ${100 + 2 * margin} ${100 + 2 * margin}"`
+    attributes += ` width="${width}" height="${height}"`
+    attributes += ` viewBox="${0 - margin} ${0 - margin} ${100 + margin * 2} ${100 + margin * 2}"`
     attributes += ' preserveAspectRatio="none"'
     attributes += ' overflow="visible"'
     const shapeElement = params.shape

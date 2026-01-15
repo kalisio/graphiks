@@ -22,7 +22,7 @@ Any shapes can be customized with the following specifications:
 | Property | Description | Default |
 |---|---|---|
 | **shape** | specifies the shape identifier to create |
-| **size** | specifies the size of the shape. It must be an array of HTML sizes | `'24px', '24px']`|
+| **size** | specifies the size of the shape. It must be an array of positive numbers. | `[24, 24]`|
 | **radius** | specifies an alternate way to define the size of the shape. Each shape implements a function that converts a radius into a size. | `undefined' |
 | **color** | specifies the color used to render the shape. It must be any HTML color. | `black`|
 | **opacity** | specifies the opacity used to render the shape. It must ranges from 0.0 (transparent) to 1.0 (opaque) | `1.0` |
@@ -30,7 +30,7 @@ Any shapes can be customized with the following specifications:
 | **icon** | specifies an icon element to be grouped with the shape. Refer to the description above. | `undefined` |
 | **text** | specifies an text element to be grouped with the shape. Refer to the description above. | `undefined` |
 | **style** | specifies a [style](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/style) element to be assigned to the shape | `undefined` |
-| **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) attribute used to render the shape | `undefined` |
+| **zoom** | specifies the overall zoom used to render the shape. It must be a positive number. | `1` |
 
  #### **stroke** sub-object
 
@@ -59,7 +59,7 @@ Any shapes can be customized with the following specifications:
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the icon | `undefined` |
 
 > [!NOTE]
-> If the **classes** property is `undefined`, the icon properties are ignored.
+> If the **classes** property is `undefined` or empty, the icon properties are ignored.
 
  #### **text** sub-object
 
@@ -76,7 +76,7 @@ Any shapes can be customized with the following specifications:
 | **transform** | specifies the [transformation]( https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform) used to render the text | `undefined` |
 
 > [!NOTE]
-> If the **label** property is `undefined`, the text properties are ignored.
+> If the **label** property is `undefined` or empty, the text properties are ignored.
 
 For instance, to create an orange four-pointed star with a red stroke, it’s as simple as this:
 
