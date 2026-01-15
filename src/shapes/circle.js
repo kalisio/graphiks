@@ -9,6 +9,7 @@ function getSize (params) {
 export function circle (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<circle cx="50" cy="50" r="50"
         ${toSVGStyleAttributes(params)}

@@ -11,11 +11,29 @@
     <div id="q-app">
       <q-layout view="lhh LpR lff">
         <q-header class="q-pa-md">
-          <banner></banner>
+          <q-banner class="bg-primary text-white">
+            <span class="text-h4">Graphiks</span>
+            <template v-slot:avatar>
+              <q-icon name="category" color="white"></q-icon>
+            </template>
+            <template v-slot:action>
+              <q-btn color="white" label="Gallery"
+                :flat="page !== 'gallery'"
+                :outline="page === 'gallery'"
+                @click="page = 'gallery'"
+              ></q-btn>
+              <q-btn color="white" label="Editor"
+                :flat="page !== 'editor'"
+                :outline="page === 'editor'"
+                @click="page = 'editor'"
+              ></q-btn>
+            </template>
+          </q-banner>
         </q-header>
         <q-page-container>
           <q-page padding>
-            <shape-collection></shape-collection>
+            <gallery v-if="page === 'gallery'"></gallery>
+            <editor v-if="page === 'editor'"></editor>
           </q-page>
         </q-page-container>
       </q-layout>
@@ -25,14 +43,20 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@2.18.5/dist/quasar.umd.prod.js"></script>
     <script type="module">
-      import Banner from './components/banner.js'
-      import ShapeCollection from './components/shape-collection.js'
+      import Gallery from './components/gallery.js'
+      import Editor from './components/editor.js'
       const app = Vue.createApp({
         components: {
-          Banner,
-          ShapeCollection
+          Gallery,
+          Editor
         },
-        setup () {}
+        setup () {
+          const { ref } = Vue
+          const page = ref('gallery')
+          return {
+            page
+          }
+        }
       })
       app.use(Quasar)
       app.mount('#q-app')

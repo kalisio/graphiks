@@ -9,6 +9,7 @@ function getSize (params) {
 export function rect (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<rect x="0" y="0" width="100" height="100"
         ${toSVGStyleAttributes(params)}
@@ -33,6 +34,7 @@ export function rect (params) {
 export function roundedRect (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<rect cx="0" cy="0" width="100" height="100" rx="20" ry="20"
         ${toSVGStyleAttributes(params)}

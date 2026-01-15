@@ -9,6 +9,7 @@ function getSize (params) {
 export function triangle (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<polygon points="50 0, 100 100, 0 100"
         ${toSVGStyleAttributes(params)}

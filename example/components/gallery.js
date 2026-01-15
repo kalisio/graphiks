@@ -1,16 +1,16 @@
-import Shape from './shape.js'
+import ShapeRenderer from './shape-renderer.js'
 
 export default {
   template: `
     <div class="row full-width justify-center items-center">
       <template v-for="shape in shapes" :key="shape.shape">
-        <shape class="q-pa-md col-xs-4 col-sm-3 col-md-2 col-lg-1 text-center" :shape="decoratedShape(shape)"></shape>
+        <ShapeRenderer class="q-pa-md col-xs-4 col-sm-3 col-md-2 col-lg-1 text-center" :shape="decoratedShape(shape)"></ShapeRenderer>
       </template>
     <div>
   `,
 
   components: {
-    Shape
+    ShapeRenderer
   },
 
   setup () {

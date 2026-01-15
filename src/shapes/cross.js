@@ -9,6 +9,7 @@ function getSize (params) {
 export function cross (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<path d="M35 0 L65 0 L65 35 L100 35 L100 65 L65 65 L65 100 L35 100 L35 65 L0 65 L0 35 L35 35 Z"
         ${toSVGStyleAttributes(params)}

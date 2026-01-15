@@ -9,6 +9,7 @@ function getSize (params) {
 export function diamond (params) {
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape:
       `<polygon points="50 0, 100 50, 50 100, 0 50"
         ${toSVGStyleAttributes(params)}

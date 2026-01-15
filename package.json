@@ -47,6 +47,7 @@
     ],
     "globals": [
       "Vue",
+      "Quasar",
       "Image"
     ]
   },

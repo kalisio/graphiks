@@ -88,6 +88,7 @@ export function donut (params) {
   }
   return {
     ...getSize(params),
+    margin: params.stroke ? params.stroke.width ?? 1 : 0,
     shape,
     icon: {
       transform: {

@@ -1,26 +1,3 @@
-import { Logger } from './logger.js'
-
-export function toSVGElement (params) {
-  if (!params) {
-    Logger.error('Invalid argument: \'params\' must be defined')
-  }
-  if (!params.width) {
-    Logger.error('Invalid argument: \'params.width\' must be defined')
-  }
-  if (!params.height) {
-    Logger.error('Invalid argument: \'params.height\' must be defined')
-  }
-  if (!params.shape) {
-    Logger.error('Invalid argument: \'params.shape\' must be defined')
-  }
-  const shapeElement = params.shape
-  const styleElement = toSVGStyleElement(params)
-  const textElement = toSVGTextElement(params)
-  const iconElement = toSVGIconElement(params)
-  const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
-  return `<svg ${toSVGAttributes(params)}>${styleElement}${groupElement}</svg>`
-}
-
 export function toSVGStyleElement (params) {
   const { style } = params
   if (!style) return ''
@@ -61,37 +38,24 @@ export function toSVGTitleElement (params) {
   return `<title>${label}</title>`
 }
 
-export function toSVGAttributes (params) {
-  if (!params) return ''
-  const margin = params.stroke ? params.stroke.width ?? 1 : 0
-  let attrs = 'xmlns="http://www.w3.org/2000/svg"'
-  attrs += ` width="${params.width}" height="${params.height}"`
-  attrs += ` viewBox="${0 - margin / 2} ${0 - margin / 2} ${100 + margin} ${100 + margin}"`
-  attrs += ' preserveAspectRatio="none"'
-  attrs += ' overflow="visible"'
-  return attrs
-}
-
 export function toSVGStyleAttributes (params) {
   if (!params) return ''
   let attrs = ''
   if (params.color) attrs += `fill="${params.color}" `
   if (params.opacity) attrs += `fill-opacity="${params.opacity}" `
-  if (params.stroke) attrs += toSVGStrokeAttributes(params.stroke)
-  return attrs.trim()
-}
-
-export function toSVGStrokeAttributes (stroke) {
-  if (stroke.color === 'transparent') return ''
-  let attrs = 'vector-effect="non-scaling-stroke" '
-  attrs += `stroke-width="${stroke.width || '1px'}" `
-  attrs += `stroke="${stroke.color || 'black'}" `
-  if (stroke.opacity) attrs += `stroke-opacity="${stroke.opacity}" `
-  if (stroke.dashArray) attrs += `stroke-dasharray="${stroke.dashArray}" `
-  if (stroke.dashOffset) attrs += `stroke-dashoffset="${stroke.dashOffset}" `
-  if (stroke.lineCap) attrs += `stroke-linecap="${stroke.lineCap}" `
-  if (stroke.lineJoin) attrs += `stroke-linejoin="${stroke.lineJoin}" `
-  if (stroke.miterLimit) attrs += `stroke-miterlimit="${stroke.miterLimit}"`
+  if (params.stroke) {
+    const stroke = params.stroke
+    if (stroke.color === 'transparent') return ''
+    attrs += 'vector-effect="non-scaling-stroke" '
+    attrs += `stroke-width="${stroke.width || '1px'}" `
+    attrs += `stroke="${stroke.color || 'black'}" `
+    if (stroke.opacity) attrs += `stroke-opacity="${stroke.opacity}" `
+    if (stroke.dashArray) attrs += `stroke-dasharray="${stroke.dashArray}" `
+    if (stroke.dashOffset) attrs += `stroke-dashoffset="${stroke.dashOffset}" `
+    if (stroke.lineCap) attrs += `stroke-linecap="${stroke.lineCap}" `
+    if (stroke.lineJoin) attrs += `stroke-linejoin="${stroke.lineJoin}" `
+    if (stroke.miterLimit) attrs += `stroke-miterlimit="${stroke.miterLimit}"`
+  }
   return attrs.trim()
 }
 

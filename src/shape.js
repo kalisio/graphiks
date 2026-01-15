@@ -1,23 +1,51 @@
-import { toSVGElement } from './utils/svg.js'
+import { Logger } from './utils/logger.js'
 import { Cache } from './utils/cache.js'
+import { toSVGStyleElement, toSVGTextElement, toSVGIconElement } from './utils/svg.js'
 
 export function Shape (params) {
-  const shape = params
+  // check argument
+  if (!params) {
+    Logger.error('Invalid argument: \'params\' must be defined')
+  }
+  if (!Number.isFinite(params.width) || params.width <= 0) {
+    Logger.error('Invalid argument: \'params.width\' must be a positive number')
+  }
+  if (!Number.isFinite(params.height) || params.height <= 0) {
+    Logger.error('Invalid argument: \'params.height\' must be a positive number')
+  }
+  if (!Number.isFinite(params.margin) || params.margin < 0) {
+    Logger.error('Invalid argument: \'params.margin\' must be a non-negative number')
+  }
 
-  shape.toSVG = () => {
-    if (shape.key) {
-      const svg = Cache.get(shape.key)
-      return svg
+  // toSVG function
+  function toSVG () {
+    // check whether this shape is already in the cache
+    if (params.key) {
+      const svg = Cache.get(params.key)
+      if (svg) return svg
     }
-    const svg = toSVGElement(shape)
-    if (svg && shape.key) {
-      Cache.put(shape.key, svg)
+    // otherwise setup the svg string
+    const margin = params.margin
+    let attributes = 'xmlns="http://www.w3.org/2000/svg"'
+    attributes += ` width="${params.width}" height="${params.height}"`
+    attributes += ` viewBox="${0 - margin} ${0 - margin} ${100 + 2 * margin} ${100 + 2 * margin}"`
+    attributes += ' preserveAspectRatio="none"'
+    attributes += ' overflow="visible"'
+    const shapeElement = params.shape
+    const styleElement = toSVGStyleElement(params)
+    const textElement = toSVGTextElement(params)
+    const iconElement = toSVGIconElement(params)
+    const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
+    const svg = `<svg ${attributes}>${styleElement}${groupElement}</svg>`
+    if (params.key) {
+      Cache.put(params.key, svg)
     }
     return svg
   }
 
-  shape.toPNG = async () => {
-    const svgBlob = new Blob([shape.toSVG()], { type: 'image/svg+xml' })
+  // toPNG function
+  async function toPNG () {
+    const svgBlob = new Blob([toSVG()], { type: 'image/svg+xml' })
     const url = URL.createObjectURL(svgBlob)
     const img = await new Promise((resolve) => {
       const image = new Image()
@@ -28,11 +56,16 @@ export function Shape (params) {
     canvas.width = img.width
     canvas.height = img.height
     const ctx = canvas.getContext('2d')
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = 'high'
     ctx.drawImage(img, 0, 0)
     const png = canvas.toDataURL('image/png')
     URL.revokeObjectURL(url)
     return png
   }
 
-  return shape
+  return {
+    toSVG,
+    toPNG
+  }
 }
