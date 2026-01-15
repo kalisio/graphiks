@@ -3,6 +3,7 @@ import { Shape } from './shape.js'
 import { Registry } from './registry.js'
 
 export function graphiks (options) {
+  if (options?.logger) Logger.setLogger(options.logger)
   if (options?.loglevel) Logger.setLevel(options.loglevel)
   return {
     listShapeTypes () {

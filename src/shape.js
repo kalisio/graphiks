@@ -16,13 +16,17 @@ export function Shape (params) {
   if (!Number.isFinite(params.margin) || params.margin < 0) {
     Logger.error('Invalid argument: \'params.margin\' must be a non-negative number')
   }
+  Logger.debug(`Shape created with ${JSON.stringify(params, null, 2)}`)
 
   // toSVG function
   function toSVG () {
     // check whether this shape is already in the cache
     if (params.key) {
       const svg = Cache.get(params.key)
-      if (svg) return svg
+      if (svg) {
+        Logger.debug(`Shape '${params.key}' retrieved from cache`)
+        return svg
+      }
     }
     // otherwise setup the svg string
     const margin = params.margin
@@ -39,6 +43,7 @@ export function Shape (params) {
     const svg = `<svg ${attributes}>${styleElement}${groupElement}</svg>`
     if (params.key) {
       Cache.put(params.key, svg)
+      Logger.debug(`Shape '${params.key}' cached`)
     }
     return svg
   }

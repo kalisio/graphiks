@@ -1,24 +1,33 @@
 const LEVELS = ['debug', 'info', 'warn', 'error']
 let LOG_LEVEL = 'warn'
+let LOGGER = null
 
-function shouldLog (level) {
-  return LEVELS.indexOf(level) >= LEVELS.indexOf(LOG_LEVEL)
+function log (level, ...args) {
+  if (LEVELS.indexOf(level) < LEVELS.indexOf(LOG_LEVEL)) return
+  if (LOGGER && typeof LOGGER[level] === 'function') {
+    LOGGER[level](...args)
+  } else if (console) {
+    console[level](...args) // eslint-disable-line no-console
+  }
 }
 
 export const Logger = {
+  setLogger (logger) {
+    LOGGER = logger
+  },
   setLevel (level) {
     if (LEVELS.includes(level)) LOG_LEVEL = level
   },
   debug (...args) {
-    if (shouldLog('debug')) console.debug('[graphiks:debug]', ...args)
+    log('debug', '[graphiks:debug]', ...args)
   },
   info (...args) {
-    if (shouldLog('info')) console.info('[graphiks]', ...args)
+    log('info', '[graphiks]', ...args)
   },
   warn (...args) {
-    if (shouldLog('warn')) console.warn('[graphiks:warn]', ...args)
+    log('wan', '[graphiks]', ...args)
   },
   error (...args) {
-    if (shouldLog('error')) console.error('[graphiks:error]', ...args)
+    log('error', '[graphiks]', ...args)
   }
 }

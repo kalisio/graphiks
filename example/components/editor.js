@@ -15,12 +15,12 @@ export default {
             icon="image"
             color="primary"
             class="absolute-top-right"
-            @click="download"
+            @click="downloadAsPNG"
           >
         </div>
         <div class="q-pa-sm col-4">
-          <q-select class="q-pa-sm" v-model="type" :options="types" label="Type" />
-          <ColorPicker v-model="color" label="Color" />
+          <q-select class="q-pa-sm" v-model="shape.shape" :options="types" label="Type" />
+          <ColorPicker v-model="shape.color" label="Color" />
         </div>
       </div>
       <div class="q-pa-md relative-position bg-amber-2 text-subtitle2" style="white-space: pre-wrap;">
@@ -31,7 +31,7 @@ export default {
           icon="content_copy"
           color="primary"
           class="absolute-top-right q-ma-sm"
-          @click="copy"
+          @click="copyToClipboard"
         >
       </div>
     </div>
@@ -44,34 +44,44 @@ export default {
 
   setup () {
     const { ref, computed, watch } = Vue
-    const { useQuasar, copyToClipboard, exportFile } = Quasar
+    const { useQuasar, copyToClipboard: qCopyToClipboard, exportFile } = Quasar
     const $q = useQuasar()
-    const Graphiks = graphiks()
+    const Graphiks = graphiks({ loglevel: 'debug' })
 
-    const shape = ref({ shape: 'circle', color: 'red', stroke: { color: 'black', width: '2' } })
-    const type = ref('circle')
-    const color = ref('color')
+    const shape = ref({
+      shape: 'circle',
+      size: [150, 150],
+      color: 'red',
+      stroke: { color: 'black', width: 2 }
+    })
     const types = Graphiks.listShapeTypes()
 
+    const type = computed(() => {
+      return shape.value?.shape
+    })
     const code = computed(() => {
       return JSON.stringify(shape.value, null, 2)
     })
 
     watch(type, (value) => {
-      shape.value.shape = value
-    })
-    watch(color, (value) => {
-      shape.value.color = value
+      if (value === 'pie' || value === 'donut') {
+        shape.value.slices = [
+          { value: 25, label: 'slice A', color: 'red' },
+          { value: 25, label: 'slice B', color: 'orange' },
+          { value: 25, label: 'slice C', color: 'lime' },
+          { value: 25, label: 'slice D', color: 'green' }
+        ]
+      } else delete shape.value.slices
     })
 
-    function copy () {
-      copyToClipboard(code.value)
+    function copyToClipboard () {
+      qCopyToClipboard(code.value)
         .then(() => {
           $q.notify({
             message: 'Code copied',
             color: 'positive',
             icon: 'check',
-            position: 'top',
+            position: 'bottom',
             timeout: 1000
           })
         })
@@ -80,12 +90,12 @@ export default {
             message: 'Error while copying code',
             color: 'negative',
             icon: 'error',
-            position: 'top'
+            position: 'bottom'
           })
         })
     }
 
-    async function download () {
+    async function downloadAsPNG () {
       const graphic = Graphiks.renderShape(shape.value)
       const pngDataUrl = await graphic.toPNG()
       const response = await fetch(pngDataUrl)
@@ -96,19 +106,17 @@ export default {
           message: 'Error while exporting image',
           color: 'negative',
           icon: 'error',
-          position: 'top'
+          position: 'bottom'
         })
       }
     }
 
     return {
       shape,
-      type,
       types,
-      color,
       code,
-      download,
-      copy
+      downloadAsPNG,
+      copyToClipboard
     }
   }
 }
