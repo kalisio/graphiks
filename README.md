@@ -26,9 +26,9 @@ Any shapes can be customized with the following specifications:
 | **radius** | specifies an alternate way to define the size of the shape. Each shape implements a function that converts a radius into a size. | `undefined' |
 | **color** | specifies the color used to render the shape. It must be any HTML color. | `black`|
 | **opacity** | specifies the opacity used to render the shape. It must ranges from 0.0 (transparent) to 1.0 (opaque) | `1.0` |
-| **stroke** | specifies the stroke parameters to render the shape. Refer to the description above. | `undefined` |
-| **icon** | specifies an icon element to be grouped with the shape. Refer to the description above. | `undefined` |
-| **text** | specifies an text element to be grouped with the shape. Refer to the description above. | `undefined` |
+| **stroke** | specifies the stroke parameters to render the shape. Refer to the [description above](#stroke-sub-object). | `undefined` |
+| **icon** | specifies an icon element to be grouped with the shape. Refer to the [description above](#icon-sub-object). | `undefined` |
+| **text** | specifies an text element to be grouped with the shape. Refer to the [description above](#text-sub-object). | `undefined` |
 | **style** | specifies a [style](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/style) element to be assigned to the shape | `undefined` |
 | **zoom** | specifies the overall zoom used to render the shape. It must be a positive number. | `1` |
 
@@ -97,13 +97,13 @@ container.appendChild(star4.toSVG())
 
 ### Installation
 
-Install from npm:
+Install from **pnpm**:
 
 ```bash
-npm install @kalisio/graphiks
+pnpm install @kalisio/graphiks
 ```
 
-Or use **yarn**:
+Or use **npm** or **yarn**.
 
 ```bash
 yarn add @kalisio/graphiks

@@ -1,4 +1,4 @@
-import { Logger } from '../utils/logger.js'
+import { logger } from '../utils/logger.js'
 import { toSVGStyleAttributes, toSVGTitleElement, toSVGTransformAttribute } from '../utils/svg.js'
 
 function getSize (params) {
@@ -15,7 +15,7 @@ const DEFAULT_STYLE = `
 export function donut (params) {
   // check arguments
   if (!params.slices) {
-    Logger.error('Invalid arguments: \'params.slices\' must be defined')
+    logger.error('Invalid arguments: \'params.slices\' must be defined')
     return
   }
   const outerRadius = 50
@@ -27,7 +27,7 @@ export function donut (params) {
     return sum + value
   }, 0)
   if (sum === 0) {
-    Logger.error('Invalid arguments: \'params.slice\' sum must be non null')
+    logger.error('Invalid arguments: \'params.slice\' sum must be non null')
     return
   }
   // render slices data

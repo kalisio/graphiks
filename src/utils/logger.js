@@ -1,33 +1,51 @@
 const LEVELS = ['debug', 'info', 'warn', 'error']
-let LOG_LEVEL = 'warn'
-let LOGGER = null
 
-function log (level, ...args) {
-  if (LEVELS.indexOf(level) < LEVELS.indexOf(LOG_LEVEL)) return
-  if (LOGGER && typeof LOGGER[level] === 'function') {
-    LOGGER[level](...args)
-  } else if (console) {
-    console[level](...args) // eslint-disable-line no-console
+class Logger {
+  constructor (options = {}) {
+    this.level = options.level || 'warn'
+    this.logger = options.logger || null
+    this.prefix = '[graphiks]'
   }
-}
 
-export const Logger = {
   setLogger (logger) {
-    LOGGER = logger
-  },
+    this.logger = logger
+  }
+
   setLevel (level) {
-    if (LEVELS.includes(level)) LOG_LEVEL = level
-  },
+    if (LEVELS.includes(level)) {
+      this.level = level
+    }
+  }
+
+  getLevel () {
+    return this.level
+  }
+
+  log (level, ...args) {
+    if (LEVELS.indexOf(level) < LEVELS.indexOf(this.level)) return
+    if (this.logger && typeof this.logger[level] === 'function') {
+      this.logger[level](...args)
+    } else if (console) {
+      console[level](...args) // eslint-disable-line no-console
+    }
+  }
+
   debug (...args) {
-    log('debug', '[graphiks:debug]', ...args)
-  },
+    this.log('debug', this.prefix, ...args)
+  }
+
   info (...args) {
-    log('info', '[graphiks]', ...args)
-  },
+    this.log('info', this.prefix, ...args)
+  }
+
   warn (...args) {
-    log('wan', '[graphiks]', ...args)
-  },
+    this.log('warn', this.prefix, ...args)
+  }
+
   error (...args) {
-    log('error', '[graphiks]', ...args)
+    this.log('error', this.prefix, ...args)
   }
 }
+
+// logger instance
+export const logger = new Logger()

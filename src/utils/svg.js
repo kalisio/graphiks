@@ -1,3 +1,37 @@
+import { logger } from './logger.js'
+
+export function toSVG (params, cache) {
+  // check whether this shape is already in the cache
+  if (params.key) {
+    const svg = cache.get(params.key)
+    if (svg) {
+      logger.debug(`SVG '${params.key}' retrieved from cache`)
+      return svg
+    }
+  }
+  // otherwise setup the svg string
+  const zoom = params.zoom || 1
+  const width = params.width * zoom
+  const height = params.height * zoom
+  const margin = params.margin
+  let attributes = 'xmlns="http://www.w3.org/2000/svg"'
+  attributes += ` width="${width}" height="${height}"`
+  attributes += ` viewBox="${0 - margin} ${0 - margin} ${100 + margin * 2} ${100 + margin * 2}"`
+  attributes += ' preserveAspectRatio="none"'
+  attributes += ' overflow="visible"'
+  const shapeElement = params.shape
+  const styleElement = toSVGStyleElement(params)
+  const textElement = toSVGTextElement(params)
+  const iconElement = toSVGIconElement(params)
+  const groupElement = `<g>${shapeElement}${textElement}${iconElement}</g>`
+  const svg = `<svg ${attributes}>${styleElement}${groupElement}</svg>`
+  if (params.key) {
+    cache.set(params.key, svg)
+    logger.debug(`SVG '${params.key}' cached`)
+  }
+  return svg
+}
+
 export function toSVGStyleElement (params) {
   const { style } = params
   if (!style) return ''
