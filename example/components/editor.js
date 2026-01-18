@@ -1,4 +1,4 @@
-import { graphiks } from '../../src/graphiks.js'
+import { graphiks } from '../graphiks.js'
 import ShapeRenderer from './shape-renderer.js'
 import ColorPicker from './color-picker.js'
 import OpacitySlider from './opacity-slider.js'
@@ -8,7 +8,7 @@ export default {
     <div class="column full-width">
       <div class="row justify-between items-center">
         <div class="q-pa-md relative-position col-7">
-          <ShapeRenderer class="text-center" :shape="shape"></ShapeRenderer>
+          <ShapeRenderer class="text-center" :params="params"></ShapeRenderer>
           <q-btn
             flat
             dense
@@ -20,7 +20,7 @@ export default {
           >
         </div>
         <div class="q-pa-sm col-4">
-          <q-select class="q-pa-sm" v-model="shape.shape" :options="types" label="Type" />
+          <q-select class="q-pa-sm" v-model="params.shape" :options="types" label="Type" />
           <div v-if="type !== 'donut' && type !== 'pie'">
             <ColorPicker v-model="color"></ColorPicker>
             <OpacitySlider v-model="opacity"></OpacitySlider>
@@ -51,16 +51,15 @@ export default {
     const { ref, computed, watch } = Vue
     const { useQuasar, copyToClipboard: qCopyToClipboard, exportFile } = Quasar
     const $q = useQuasar()
-    const Graphiks = graphiks({ loglevel: 'debug' })
 
-    const shape = ref({
+    const params = ref({
       shape: 'circle',
       zoom: 3,
       color: 'orange',
       opacity: 1.0,
       stroke: { color: 'black', width: 2 }
     })
-    const types = Graphiks.listShapeTypes()
+    const types = graphiks.listShapeTypes()
     const color = ref('orange')
     const opacity = ref(1.0)
     const slices = ref([
@@ -71,28 +70,28 @@ export default {
     ])
 
     const type = computed(() => {
-      return shape.value?.shape
+      return params.value?.shape
     })
     const code = computed(() => {
-      return JSON.stringify(shape.value, null, 2)
+      return JSON.stringify(params.value, null, 2)
     })
 
     watch(type, (value) => {
       if (value === 'pie' || value === 'donut') {
-        shape.value.slices = slices.value
-        delete shape.value.color
-        delete shape.value.opacity
+        params.value.slices = slices.value
+        delete params.value.color
+        delete params.value.opacity
       } else {
-        delete shape.value.slices
-        shape.value.color = color.value
-        shape.value.opacity = opacity.value
+        delete params.value.slices
+        params.value.color = color.value
+        params.value.opacity = opacity.value
       }
     })
     watch(color, (value) => {
-      if (shape.value.color) shape.value.color = value
+      if (params.value.color) params.value.color = value
     })
     watch(opacity, (value) => {
-      if (shape.value.opacity) shape.value.opacity = value
+      if (params.value.opacity) params.value.opacity = value
     })
 
     function copyToClipboard () {
@@ -117,8 +116,9 @@ export default {
     }
 
     async function downloadAsPNG () {
-      const graphic = Graphiks.renderShape(shape.value)
-      const pngDataUrl = await graphic.toPNG()
+      const shape = graphiks.renderShape(params.value)
+      if (!shape) return
+      const pngDataUrl = await shape.toPNG()
       const response = await fetch(pngDataUrl)
       const blob = await response.blob()
       const status = exportFile('shape.png', blob, 'image/png')
@@ -133,7 +133,7 @@ export default {
     }
 
     return {
-      shape,
+      params,
       types,
       type,
       color,

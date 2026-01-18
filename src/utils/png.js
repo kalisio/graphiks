@@ -10,7 +10,7 @@ export async function toPNG (params, cache) {
       return png
     }
   }
-  const svgBlob = new Blob([toSVG()], { type: 'image/svg+xml' })
+  const svgBlob = new Blob([toSVG(params)], { type: 'image/svg+xml' })
   const url = URL.createObjectURL(svgBlob)
   const img = await new Promise((resolve) => {
     const image = new Image()
@@ -28,7 +28,7 @@ export async function toPNG (params, cache) {
   URL.revokeObjectURL(url)
   if (params.key) {
     cache.set(params.key, png)
-    logger.debug(`PNG ${params.key}' cached`)
+    logger.debug(`PNG '${params.key}' cached`)
   }
   return png
 }

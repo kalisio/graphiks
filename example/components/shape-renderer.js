@@ -1,4 +1,4 @@
-import { graphiks } from '../../src/graphiks.js'
+import { graphiks } from '../graphiks.js'
 
 export default {
   template: `
@@ -6,7 +6,7 @@ export default {
   `,
 
   props: {
-    shape: {
+    params: {
       type: Object,
       required: true
     }
@@ -15,12 +15,11 @@ export default {
   setup (props) {
     // Data
     const { computed } = Vue
-    const Graphiks = graphiks()
 
     const svg = computed(() => {
-      const graphics = Graphiks.renderShape(props.shape)
-      if (!graphics) return ''
-      return graphics.toSVG()
+      const shape = graphiks.renderShape(props.params)
+      if (!shape) return
+      return shape.toSVG()
     })
 
     return {

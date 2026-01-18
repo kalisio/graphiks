@@ -37,49 +37,54 @@ registry.register('marker-pin', markerPin)
 registry.register('square-pin', squarePin)
 
 // Function to create the main graphiks instance
-export function graphiks (options) {
-  if (options?.logger) logger.setLogger(options.logger)
-  if (options?.loglevel) logger.setLevel(options.loglevel)
-  return {
-    svgCache: new Cache(options?.svgCacheSize || 100),
-    pngCache: new Cache(options?.pngCacheSize || 100),
-    listShapeTypes () {
-      return registry.list()
-    },
-    hasShapeType (type) {
-      return registry.has(type)
-    },
-    registerShapeType (type, generatorFn) {
-      registry.register(type, generatorFn)
-    },
-    renderShape (params) {
-      // check arguments
-      if (!params.shape) {
-        logger.error('Invalid argument: \'params.shape\' must be defined')
-      }
-      const zoom = params.zoom || 1
-      if (!Number.isFinite(zoom) || zoom <= 0) {
-        logger.error('Invalid argument: \'params.zoom\' must be positive number')
-      }
-      // generate the shape
-      const generatorFn = registry.get(params.shape)
-      if (!generatorFn) {
-        logger.error(`Invalid shape: '${params.shape}' is unknown`)
-      }
-      params = generatorFn(params)
-      if (!Number.isFinite(params.width) || params.width <= 0) {
-        logger.error('Invalid argument: \'params.width\' must be a positive number')
-      }
-      if (!Number.isFinite(params.height) || params.height <= 0) {
-        logger.error('Invalid argument: \'params.height\' must be a positive number')
-      }
-      if (!Number.isFinite(params.margin) || params.margin < 0) {
-        logger.error('Invalid argument: \'params.margin\' must be a non-negative number')
-      }
-      return {
-        toSVG: () => toSVG(params, this.svgCache),
-        toPNG: () => toPNG(params, this.pngCache)
-      }
+export class Graphiks {
+  constructor (options) {
+    this.svgCache = new Cache(options?.svgCacheSize || 100)
+    this.pngCache = new Cache(options?.pngCacheSize || 100)
+  }
+
+  listShapeTypes () {
+    return registry.list()
+  }
+
+  hasShapeType (type) {
+    return registry.has(type)
+  }
+
+  registerShapeType (type, generatorFn) {
+    registry.register(type, generatorFn)
+  }
+
+  renderShape (params) {
+    // check arguments
+    if (!params.shape) {
+      logger.error('Invalid argument: \'params.shape\' must be defined')
+    }
+    const zoom = params.zoom || 1
+    if (!Number.isFinite(zoom) || zoom <= 0) {
+      logger.error('Invalid argument: \'params.zoom\' must be positive number')
+    }
+    // generate the shape
+    const generatorFn = registry.get(params.shape)
+    if (!generatorFn) {
+      logger.error(`Invalid shape: '${params.shape}' is unknown`)
+    }
+    params = generatorFn(params)
+    if (!Number.isFinite(params.width) || params.width <= 0) {
+      logger.error('Invalid argument: \'params.width\' must be a positive number')
+    }
+    if (!Number.isFinite(params.height) || params.height <= 0) {
+      logger.error('Invalid argument: \'params.height\' must be a positive number')
+    }
+    if (!Number.isFinite(params.margin) || params.margin < 0) {
+      logger.error('Invalid argument: \'params.margin\' must be a non-negative number')
+    }
+    return {
+      toSVG: () => toSVG(params, this.svgCache),
+      toPNG: () => toPNG(params, this.pngCache)
     }
   }
 }
+
+// Export logger
+export { logger }

@@ -4,7 +4,7 @@ export default {
   template: `
     <div class="row full-width justify-center items-center">
       <template v-for="shape in shapes" :key="shape.shape">
-        <ShapeRenderer class="q-pa-md col-xs-4 col-sm-3 col-md-2 col-lg-1 text-center" :shape="decoratedShape(shape)"></ShapeRenderer>
+        <ShapeRenderer class="q-pa-md col-xs-4 col-sm-3 col-md-2 col-lg-1 text-center" :params="decoratedShape(shape)"></ShapeRenderer>
       </template>
     <div>
   `,
@@ -18,6 +18,7 @@ export default {
       return {
         ...shape,
         label: shape.shape,
+        radius: 30,
         stroke: {},
         text: {
           label: shape.shape,

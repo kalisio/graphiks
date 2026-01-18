@@ -1,11 +1,11 @@
 import fs from 'fs'
-import { describe, it, beforeAll, expect } from 'vitest'
-import { graphiks } from '../src/graphiks.js'
+import { describe, it, expect } from 'vitest'
+import { Graphiks } from '../src/graphiks.js'
 
 const MODE = process.env.TEST_MODE || 'run'
 
 describe('shapes', () => {
-  let Graphiks
+  const graphiks = new Graphiks()
 
   const BasicShapes = [
     { shape: 'circle', color: 'red' },
@@ -44,28 +44,24 @@ describe('shapes', () => {
     }
   ]
 
-  beforeAll(() => {
-    Graphiks = graphiks()
-  })
-
   it('should list the shapes', () => {
-    const shapes = Graphiks.listShapeTypes()
+    const shapes = graphiks.listShapeTypes()
     expect(Array.isArray(shapes)).toBe(true)
   })
 
   it('should have the circle shape registered', () => {
-    const hasCircle = Graphiks.hasShapeType('circle')
+    const hasCircle = graphiks.hasShapeType('circle')
     expect(hasCircle).toBe(true)
   })
 
   it('should not have the dummy shape registered', () => {
-    const hasDummy = Graphiks.hasShapeType('dummy')
+    const hasDummy = graphiks.hasShapeType('dummy')
     expect(hasDummy).toBe(false)
   })
 
   it('should render the registered shapes correctly', () => {
     for (const shape of BasicShapes) {
-      const graphic = Graphiks.renderShape(shape)
+      const graphic = graphiks.renderShape(shape)
       expect(graphic).not.toBeNull()
 
       if (MODE === 'run') {

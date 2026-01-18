@@ -2,7 +2,7 @@ import { toSVGStyleAttributes, toSVGTitleElement, toSVGTransformAttribute } from
 
 function getSize (params) {
   if (params.size) return { width: params.size[0], height: params.size[1] }
-  if (params.radius) return { width: params.radius * 2.4, height: params.radius * 2.4 }
+  if (params.radius) return { width: params.radius * 2.2, height: params.radius * 2.2 }
   return { width: 50, height: 50 }
 }
 
