@@ -8,14 +8,14 @@
 
 > A minimal parametric shape factory for SVG graphics — built in pure JavaScript.
 
-**Graphiks** is a lightweight and extensible library for creating, composing, and rendering parametric shapes using **SVG**.
+**graphiks** is a lightweight and extensible library for creating, composing, and rendering parametric shapes using **SVG**.
 It provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements.
 
 ---
 
 ## Principle
 
-**Graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **Graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here](https://kalisio.github.io/graphiks/example/index.html).
+**graphics** provides a simple factory pattern that lets you register your own shape generators and render them as SVG elements. By default, **graphiks** comes with a set of predefined marker shapes: `circle`, `rect`, `rounded-rect`, `diamond` and so on... The complete list of shapes is available [here](https://kalisio.github.io/graphiks/example/index.html).
 
 Any shapes can be customized with the following specifications:
 
